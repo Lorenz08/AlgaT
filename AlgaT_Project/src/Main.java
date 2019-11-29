@@ -12,10 +12,14 @@ public class Main extends Application {
     public static Stage window;
     private static Stage new_window = new Stage();
     public static Integer current_lesson = 0;
+    public static Integer current_exercise = 0;
+
     public static boolean b = true;
     public static boolean ok_lesson2 = false;
     public static boolean ok_lesson3 = false;
-
+    public static boolean ok_exercise1 = false;
+    public static boolean ok_exercise2 = false;
+    public static boolean ok_exercise3 = false;
 
 
 
@@ -73,4 +77,3 @@ public class Main extends Application {
     }
 
 }
-
