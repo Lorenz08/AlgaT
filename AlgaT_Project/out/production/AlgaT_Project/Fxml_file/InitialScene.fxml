@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeController">
+   <children>
+      <Button layoutX="28.0" layoutY="411.0" mnemonicParsing="false" onAction="#simulatorButton" prefHeight="53.0" prefWidth="177.0" text="Simulator" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
+      <Label layoutX="157.0" layoutY="41.0" text="Tutorial su gli alberi bilanciati">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="132.0" layoutY="88.0" prefHeight="182.0" prefWidth="337.0" text="Tutoria che spiega come gli alberi bilanciati &#10;salvano la foresta insieme a Greta Thenberg" />
+      <MenuButton layoutX="27.0" layoutY="298.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="180.0" text="Lesson Menu">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#buttomLesson1" text="Lesson 1" />
+          <MenuItem mnemonicParsing="false" onAction="#buttomLesson2" text="Lesson 2" />
+            <MenuItem mnemonicParsing="false" onAction="#buttomLesson3" text="Lesson 3" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>
