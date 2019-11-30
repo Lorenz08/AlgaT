@@ -1,20 +1,37 @@
-﻿TXT:FILE DI TESTO PER LA LEZIONE 1
-TXT:1
+﻿TXT:FILE DI TESTO PER LA LEZIONE 2
+TXT:Dom1
+TXT:check1
+TXT:check2 (corretta)
+TXT:check3
+TXT:check4
 IMG:/Images/unnamed.jpg
 END
-TXT:2
+TXT:Dom2
+TXT:check1
+TXT:check2 (corretta)
+TXT:check3
+TXT:check4
 IMG:Images/unnamed.jpg
 END
-TXT:3
+TXT:Dom3
+TXT:check1
+TXT:check2 (corretta)
+TXT:check3
+TXT:check4
 IMG:null
 END
-TXT:4
+TXT:Dom4
+TXT:check1
+TXT:check2 (corretta)
+TXT:check3
+TXT:check4
 IMG:null
 END
-TXT:5
+TXT:Dom5
+TXT:check1
+TXT:check2 (corretta)
+TXT:check3
+TXT:check4
 IMG:null
 END
-
-
-
 
