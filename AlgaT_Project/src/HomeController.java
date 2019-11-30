@@ -51,19 +51,24 @@ public class HomeController extends Main {
     }
 
 
-    public void buttomExercise1(ActionEvent event) throws Exception{
+    public void buttomExercise1(ActionEvent event) throws Exception {
+//        if(ok_exercise1){
         current_exercise = 1;
-        Parent tutorialLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
-        Scene tutorialScene = new Scene(tutorialLayout);
-        window.setScene(tutorialScene);
+        Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
+        Scene exerciselScene = new Scene(exerciseLayout);
+        window.setScene(exerciselScene);
+//        }
+//        else{
+//            setError_window(0);
+//        }
     }
 
     public void buttomExercise2(ActionEvent event) throws Exception{
-        if(ok_lesson2) {
+        if(ok_exercise2 && ok_lesson2) {
             current_exercise = 2;
-            Parent tutorialLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Esercitazione_1.fxml"));
-            Scene tutorialScene = new Scene(tutorialLayout);
-            window.setScene(tutorialScene);
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Esercitazione_1.fxml"));
+            Scene exerciselScene = new Scene(exerciseLayout);
+            window.setScene(exerciselScene);
         }
         else{
             setError_window(0);
@@ -71,11 +76,11 @@ public class HomeController extends Main {
     }
 
     public void buttomExercise3(ActionEvent event) throws Exception{
-        if (ok_lesson3) {
+        if (ok_exercise3 && ok_lesson3) {
             current_exercise = 3;
-            Parent tutorialLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
-            Scene tutorialScene = new Scene(tutorialLayout);
-            window.setScene(tutorialScene);
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
+            Scene exerciselScene = new Scene(exerciseLayout);
+            window.setScene(exerciselScene);
         }
         else{
             setError_window(1);

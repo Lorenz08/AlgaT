@@ -76,13 +76,15 @@ public class ExerciseClass extends Main implements Initializable{
         InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
-        creat_listPages(file_to_read, tmp);
+
+        creat_list_exercise_Pages(file_to_read, tmp);
+
         i = tmp.size();
         setPage(current_exercise, tmp);
     }
 
-
-    private void creat_listPages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
+//crea la lista di pagine delle esercitazioni da svolgere
+    private void creat_list_exercise_Pages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
         Integer i = 0;
         String complete_page = "";
         String line_of_page_to_add;
@@ -114,29 +116,30 @@ public class ExerciseClass extends Main implements Initializable{
         tmp.close();
     }
 
-
-    public void setPage(Integer currentLesson, LinkedList<Page> list){
-        if(currentLesson == 1) {
+// setta il numero di esercitazione da svolgere
+    public void setPage(Integer currentExercise, LinkedList<Page> list){
+        if(currentExercise == 1) {
             Page nPage = list.get(current_exercize_page1);
             Label1.setText(nPage.getText());
             ImageView1.setImage(nPage.getImage());
         }
-//        else if(currentLesson == 2) {
-//            Page nPage = list.get(current_page2);
-//            Label2.setText(nPage.getText());
-//            ImageView2.setImage(nPage.getImage());
-//        }
-//        else if(currentLesson == 3) {
-//            Page nPage = list.get(current_page3);
-//            Label3.setText(nPage.getText());
-//            ImageView3.setImage(nPage.getImage());
-//        }
+        else if(currentExercise == 2) {
+            Page nPage = list.get(current_exercize_page2);
+            Label1.setText(nPage.getText());
+            ImageView1.setImage(nPage.getImage());
+        }
+        else if(currentExercise == 3) {
+            Page nPage = list.get(current_exercize_page3);
+            Label1.setText(nPage.getText());
+            ImageView1.setImage(nPage.getImage());
+        }
     }
 
 
     public void setNew_Page(){
         LinkedList<Page> tmp = new LinkedList<Page>();
         Integer x = 0;
+
         if (current_exercise == 1) {
             x = current_exercize_page1;
             tmp = list_of_pages1;
