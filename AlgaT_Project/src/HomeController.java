@@ -18,9 +18,11 @@ public class HomeController extends Main {
 
 
 
-    public void buttomLesson1(ActionEvent event) throws Exception {
-        current_lesson = 1;
-        Parent tutorialLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Lezioni/Lesson1.fxml"));
+    public void buttomLesson1(ActionEvent event) throws Exception{
+        //if(ok_exercise1) {
+            current_lesson = 1;
+        Parent tutorialLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Lesson1.fxml"));
+
         Scene tutorialScene = new Scene(tutorialLayout);
         window.setScene(tutorialScene);
     }
@@ -50,22 +52,24 @@ public class HomeController extends Main {
     }
 
 
-    public void buttonExercise1(ActionEvent event) throws Exception {
-        if(ok_exercise1){
-            current_exercise = 1;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Test/Esercitazione_1.fxml"));
-            Scene exerciselScene = new Scene(exerciseLayout);
-            window.setScene(exerciselScene);
-        }
-        else{
-            setError_window(0);
-        }
+
+    public void buttomExercise1(ActionEvent event) throws Exception {
+//        if(ok_exercise1){
+        current_exercise = 1;
+        Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
+        Scene exerciselScene = new Scene(exerciseLayout);
+        window.setScene(exerciselScene);
+//        }
+//        else{
+//            setError_window(0);
+//        }
     }
 
-    public void buttonExercise2(ActionEvent event) throws Exception{
+    public void buttomExercise2(ActionEvent event) throws Exception{
         if(ok_exercise2 && ok_lesson2) {
             current_exercise = 2;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Test/Esercitazione_1.fxml"));
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Esercitazione_1.fxml"));
+
             Scene exerciselScene = new Scene(exerciseLayout);
             window.setScene(exerciselScene);
         }
@@ -74,10 +78,11 @@ public class HomeController extends Main {
         }
     }
 
-    public void buttonExercise3(ActionEvent event) throws Exception{
+
+    public void buttomExercise3(ActionEvent event) throws Exception{
         if (ok_exercise3 && ok_lesson3) {
             current_exercise = 3;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Test/Esercitazione_1.fxml"));
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Esercitazione_1.fxml"));
             Scene exerciselScene = new Scene(exerciseLayout);
             window.setScene(exerciselScene);
         }
@@ -87,7 +92,8 @@ public class HomeController extends Main {
     }
 
 
-    public void setError_window(Integer i) throws IOException {
+
+    private void setError_window(Integer i) throws IOException {
         error_window.setX(230);
         error_window.setY(300);
         error_window.setWidth(200);

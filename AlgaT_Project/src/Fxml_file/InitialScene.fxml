@@ -21,9 +21,11 @@
          <children>
             <MenuButton mnemonicParsing="false" prefHeight="43.0" prefWidth="173.0" text="Lesson Menu">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#buttonLesson1" text="Lesson 1" />
-                <MenuItem mnemonicParsing="false" onAction="#buttonLesson2" text="Lesson 2" />
-                  <MenuItem mnemonicParsing="false" onAction="#buttonLesson3" text="Lesson 3" />
+
+                <MenuItem mnemonicParsing="false" onAction="#buttomLesson1" text="Lesson 1" />
+                <MenuItem mnemonicParsing="false" onAction="#buttomLesson2" text="Lesson 2" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttomLesson3" text="Lesson 3" />
+
               </items>
             </MenuButton>
          </children>

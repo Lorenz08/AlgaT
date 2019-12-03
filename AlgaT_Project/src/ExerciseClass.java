@@ -2,14 +2,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import javafx.scene.Node;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
@@ -17,7 +18,9 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 
-public class ExerciseClass extends Main implements (Initializable, Test_Interface){
+
+public class ExerciseClass extends Main implements Initializable{
+
 
     private boolean complete = false;
 //    private boolean complete2= false;
@@ -93,6 +96,7 @@ public class ExerciseClass extends Main implements (Initializable, Test_Interfac
         Image image_to_load = null;
 
         while ((line_of_page_to_add = tmp.readLine())!= null) {
+
             //se esiste il file
             if (line_of_page_to_add.startsWith("TXT:")){
                 //aggiungi la prima riga nella variabile stringa line_of_page_to_add
@@ -103,6 +107,7 @@ public class ExerciseClass extends Main implements (Initializable, Test_Interfac
                 if (control == '#') {
 
                     line_of_page_to_add = line_of_page_to_add.replace("#", "");
+
 
                     complete_page = complete_page.concat(line_of_page_to_add);
                     complete_page += '\n';
@@ -174,6 +179,7 @@ public class ExerciseClass extends Main implements (Initializable, Test_Interfac
                 window.setScene(simulatorScene);
             }else if(x == tmp.size()){
                 setPage(current_exercise, tmp);
+
             }
             else if (x < 0){
                 Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
@@ -190,27 +196,20 @@ public class ExerciseClass extends Main implements (Initializable, Test_Interfac
     }
 
 
-    //Load the next test layout, only if the answer is correct
-    public void moveForward(ActionEvent event) {
-        if(checkAnswer()) {
-            try {
 
-                Parent nextLayout = FXMLLoader.load(getClass().getResource("/UI/Test2.fxml"));
-                Scene toSetUp = new Scene(nextLayout);
-                Stage window = (Stage) (((Node) event.getSource()).getScene()).getWindow();
-                window.setScene(toSetUp);
-                window.show();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-
-        } else {
-            wrongSolution.setText("Incorrect! Please try again");
+    public void nextPage(ActionEvent event) {
+        if (current_exercise == 1) {
+            current_exercize_page1++;
         }
+        else if (current_exercise == 2) {
+            current_exercize_page2++;
+        }
+        else if (current_exercise == 3) {
+            current_exercize_page3++;
+        }
+        setNew_Page();
     }
-}
 
 
     public void prevPage(ActionEvent event) {
