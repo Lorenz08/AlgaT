@@ -63,9 +63,9 @@ public class LessonClass extends Main implements Initializable {
 
     private void creat_listPages_of_all_lessons(Integer numberOfPage, LinkedList<Page> listOfPage) throws IOException {
         String x = "";
-        if (current_lesson == 1) x = "Text_file/TxtLesson1";
-        if (current_lesson == 2) x = "Text_file/TxtLesson2";
-        if (current_lesson == 3) x = "Text_file/TxtLesson3";
+        if (current_lesson == 1) x = "Text_file/Lezioni/TxtLesson1";
+        if (current_lesson == 2) x = "Text_file/Lezioni/TxtLesson2";
+        if (current_lesson == 3) x = "Text_file/Lezioni/TxtLesson3";
         InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
@@ -160,7 +160,7 @@ public class LessonClass extends Main implements Initializable {
 
     public void nextPage(ActionEvent event) throws IOException {
         if (current_lesson == 1) {
-           current_page1++;
+            current_page1++;
         }
         else if (current_lesson == 2) {
             current_page2++;
@@ -187,8 +187,3 @@ public class LessonClass extends Main implements Initializable {
 
 
 }
-
-
-
-
-
