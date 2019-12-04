@@ -1,0 +1,39 @@
+﻿TXT:FILE DI TESTO PER LA LEZIONE 3
+TXT:Dom1
+TXT:check1
+TXT:check2
+TXT:check3 (corretta)
+TXT:check4
+IMG:/Images/unnamed.jpg
+END
+TXT:Dom2
+TXT:check1 (corretta)
+TXT:check2
+TXT:check3
+TXT:check4
+IMG:Images/unnamed.jpg
+END
+TXT:Dom3
+TXT:check1
+TXT:check2
+TXT:check3 (corretta)
+TXT:check4
+IMG:null
+END
+TXT:Dom4
+TXT:check1
+TXT:check2
+TXT:check3 (corretta)
+TXT:check4
+IMG:null
+END
+TXT:Dom5
+TXT:check1
+TXT:check2
+TXT:check3 (corretta)
+TXT:check4
+IMG:null
+END
+
+
+
