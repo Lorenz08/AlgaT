@@ -12,19 +12,18 @@ public class Page {
         text = txt;
     }
 
-    Page(Integer i, String txt, Image img ,String[] risposte) {
-        super();
-        number_of_page = i;
+    Page(String txt, Image img ,String[] risposte) {
+        //super();
         image = img;
         text = txt;
         value = risposte;
     }
-    Page(Integer i, String txt, Image img ) {
-        super();
-        number_of_page = i;
-        image = img;
-        text = txt;
-    }
+//    Page(Integer i, String txt, Image img ) {
+//        super();
+//        number_of_page = i;
+//        image = img;
+//        text = txt;
+//    }
 
     public String getValue(Integer i) {
         return value[i];
