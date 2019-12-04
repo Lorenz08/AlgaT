@@ -20,8 +20,6 @@ public class ExerciseClass extends Main implements Initializable{
 
     private boolean complete = false;
     private boolean is_showSolution = true;
-//    private boolean complete2= false;
-//    private boolean complete3 = false;
 
 
     private Integer current_exercize_page1 = 0;
@@ -56,7 +54,7 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
-//crea la lista di pagine da vedere
+    //crea la lista di pagine da vedere
     public void inizializzaEsercitazioni(Integer i) throws IOException {
         if (i == 1){
             //lista delle pagine della prima lezione
@@ -122,7 +120,7 @@ public class ExerciseClass extends Main implements Initializable{
                 line_of_page_to_add = line_of_page_to_add.replace("IMG:", "");
                 //rimuovo IMG: e se non ce nessuna immagine non caricare nulla
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
-                //altrimenti crea una nuova instanza di immagine
+                    //altrimenti crea una nuova instanza di immagine
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }else if(line_of_page_to_add.startsWith("CK1:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK1:", "");
@@ -149,16 +147,16 @@ public class ExerciseClass extends Main implements Initializable{
         tmp.close();
     }
 
-// setta il numero di esercitazione da svolgere
+    // setta il numero di esercitazione da svolgere
     public void setPage(Integer currentExercise, LinkedList<Page> list){
         Page nPage = new Page(0,"",null);
         switch (currentExercise){
             case 1:
-                 nPage = list.get(current_exercize_page1);
+                nPage = list.get(current_exercize_page1);
             case 2:
-                 nPage = list.get(current_exercize_page2);
+                nPage = list.get(current_exercize_page2);
             case 3:
-                 nPage = list.get(current_exercize_page3);
+                nPage = list.get(current_exercize_page3);
         }
         LaberlDomanda.setText(nPage.getText());
         value1.setText(nPage.getValue(0));
@@ -193,7 +191,7 @@ public class ExerciseClass extends Main implements Initializable{
             }
             showHome();
         }else if(x == tmp.size())
-                setPage(current_exercise, tmp);
+            setPage(current_exercise, tmp);
         else if (x < 0){
             showHome();
         }else
@@ -217,7 +215,7 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
-    public void nextPage(ActionEvent event) throws IOException{
+    public void nextPage() throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1++;
@@ -229,7 +227,7 @@ public class ExerciseClass extends Main implements Initializable{
         setNew_Page();
     }
 
-    public void prevPage(ActionEvent event) throws IOException{
+    public void prevPage() throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1--;
@@ -242,8 +240,4 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
 }
-
-
-
-
 

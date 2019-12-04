@@ -1,12 +1,13 @@
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.TextAlignment;
 
 import java.io.*;
 import java.net.URL;
@@ -16,67 +17,61 @@ import java.util.ResourceBundle;
 
 public class LessonClass extends Main implements Initializable {
 
-    private Integer current_page1 = 0;
-    private Integer current_page2 = 0;
-    private Integer current_page3 = 0;
+    private double current_page1 = 0;
+    private double current_page2 = 0;
+    private double current_page3 = 0;
     private LinkedList<Page> list_of_pages1 = null;
     private LinkedList<Page> list_of_pages2 = null;
     private LinkedList<Page> list_of_pages3 = null;
-    private Integer number_of_pages_of_lesson1 = 0;
-    private Integer number_of_pages_of_lesson2 = 0;
-    private Integer number_of_pages_of_lesson3 = 0;
     @FXML private Label Label1;
     @FXML private ImageView ImageView1;
     @FXML private Label Label2;
     @FXML private ImageView ImageView2;
     @FXML private Label Label3;
     @FXML private ImageView ImageView3;
+    @FXML private ProgressBar pb1;
+    @FXML private ProgressBar pb2;
+    @FXML private ProgressBar pb3;
 
+    double current_prog_lesson1 = 0;
+    double current_prog_lesson2 = 0;
+    double current_prog_lesson3 = 0;
+    double prog_lesson1 = 0;
+    double prog_lesson2 = 0;
+    double prog_lesson3 = 0;
 
 
 
     public void initialize(URL location, ResourceBundle resources) {
+        list_of_pages1 = new LinkedList<Page>();
+        list_of_pages2 = new LinkedList<Page>();
+        list_of_pages3 = new LinkedList<Page>();
         try {
-            xxx(current_lesson);
+            creat_listPages_of_all_lessons(list_of_pages1, "Text_file/TxtLesson1" );
+            creat_listPages_of_all_lessons(list_of_pages2, "Text_file/TxtLesson2");
+            creat_listPages_of_all_lessons(list_of_pages3, "Text_file/TxtLesson3");
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void xxx(Integer i) throws IOException {
-        if (i == 1){
-            list_of_pages1 = new LinkedList<Page>();
-            creat_listPages_of_all_lessons(number_of_pages_of_lesson1, list_of_pages1);
-        }
-        else if (i == 2){
-            list_of_pages2 = new LinkedList<Page>();
-            creat_listPages_of_all_lessons(number_of_pages_of_lesson2, list_of_pages2);
-        }
-        else if (i == 3){
-            list_of_pages3 = new LinkedList<Page>();
-            creat_listPages_of_all_lessons(number_of_pages_of_lesson3, list_of_pages3);
-        }
-
+        setPage();
+        prog_lesson1 = 1.0/list_of_pages1.size();
+        prog_lesson2 = 1.0/list_of_pages2.size();
+        prog_lesson3 = 1.0/list_of_pages3.size();
+        current_prog_lesson1 = prog_lesson1;
+        current_prog_lesson2 = prog_lesson2;
+        current_prog_lesson3 = prog_lesson3;
     }
 
 
-
-    private void creat_listPages_of_all_lessons(Integer i, LinkedList<Page> tmp) throws IOException {
-        String x = "";
-        if (current_lesson == 1) x = "Text_file/Lezioni/TxtLesson1";
-        if (current_lesson == 2) x = "Text_file/Lezioni/TxtLesson2";
-        if (current_lesson == 3) x = "Text_file/Lezioni/TxtLesson3";
-        InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
+    private void creat_listPages_of_all_lessons(LinkedList<Page> listOfPage, String String) throws IOException {
+        InputStream file_to_open = getClass().getResourceAsStream(String);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
-        creat_listPages(file_to_read, tmp);
-        i = tmp.size();
-        setPage(current_lesson, tmp);
+        creat_listPages(file_to_read, listOfPage);
     }
 
 
     private void creat_listPages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
-        Integer i = 0;
         String complete_page = "";
         String line_of_page_to_add;
         Image image_to_load = null;
@@ -84,66 +79,43 @@ public class LessonClass extends Main implements Initializable {
         while ((line_of_page_to_add = tmp.readLine())!= null) {
             if (line_of_page_to_add.startsWith("TXT:")){
                 line_of_page_to_add = line_of_page_to_add.replace("TXT:", "");
-                char control = line_of_page_to_add.charAt(line_of_page_to_add.length() - 1);
-                if (control == '#') {
-                    line_of_page_to_add = line_of_page_to_add.replace("#", "");
-                    complete_page = complete_page.concat(line_of_page_to_add);
-                    complete_page += '\n';
-                }
-                else complete_page = complete_page.concat(line_of_page_to_add);
+                complete_page = complete_page.concat(line_of_page_to_add);
             }
+
             if (line_of_page_to_add.startsWith("IMG:")){
                 line_of_page_to_add = line_of_page_to_add.replace("IMG:", "");
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }
+
+
             if (line_of_page_to_add.startsWith("END")){
-                Page newP = new Page(i, complete_page, image_to_load);
+                Page newP = new Page(complete_page, image_to_load);
                 list.add(newP);
                 complete_page = "";
-                i++;
             }
         }
         tmp.close();
     }
 
 
-    public void setPage(Integer currentLesson, LinkedList<Page> list){
-        if(currentLesson == 1) {
-            Page nPage = list.get(current_page1);
-            Label1.setText(nPage.getText());
-            ImageView1.setImage(nPage.getImage());
-        }
-        else if(currentLesson == 2) {
-            Page nPage = list.get(current_page2);
-            Label2.setText(nPage.getText());
-            ImageView2.setImage(nPage.getImage());
-        }
-        else if(currentLesson == 3) {
-            Page nPage = list.get(current_page3);
-            Label3.setText(nPage.getText());
-            ImageView3.setImage(nPage.getImage());
-        }
+    public void setPage(){
+        if (current_lesson == 1) xxx(Label1, ImageView1, list_of_pages1, current_page1);
+        else if (current_lesson == 2) xxx(Label2, ImageView2, list_of_pages2, current_page2);
+        else if (current_lesson == 3) xxx(Label3, ImageView3,list_of_pages3,current_page3);
+    }
+
+    public void xxx(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
+        Page nPage = list.get((int) currentl);
+        l1.setText(nPage.getText());
+        l1.setTextAlignment(TextAlignment.CENTER);
+        l1.setWrapText(true);
+        img1.setImage(nPage.getImage());
     }
 
 
-    public void setNew_Page(){
-        LinkedList<Page> tmp = new LinkedList<Page>();
-        Integer x = 0;
-        if (current_lesson == 1) {
-            x = current_page1;
-            tmp = list_of_pages1;
-        }
-        else if (current_lesson == 2) {
-            x = current_page2;
-            tmp = list_of_pages2;
-        }
-        else if (current_lesson == 3) {
-            x = current_page3;
-            tmp = list_of_pages3;
-        }
-        try {
-            if (x == tmp.size()){
+    public void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
+            if (currentLess == list.size()){
                 //sblocco degli esercizi
                 switch (current_lesson){
                     case 1:
@@ -153,51 +125,64 @@ public class LessonClass extends Main implements Initializable {
                     case 3:
                         ok_exercise3 = true;
                 }
-                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
-                Scene simulatorScene = new Scene(simulatorLayout);
-                window.setScene(simulatorScene);
-            }
-            else if (x < 0){
-                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
-                Scene simulatorScene = new Scene(simulatorLayout);
-                window.setScene(simulatorScene);
-            }
-            else{
-                setPage(current_lesson, tmp);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+            Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
+            Scene simulatorScene = new Scene(simulatorLayout);
+            window.setScene(simulatorScene);
+        } else if (currentLess < 0) {
+            Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
+            Scene simulatorScene = new Scene(simulatorLayout);
+            window.setScene(simulatorScene);
+        } else {
+            setPage();
         }
     }
 
 
-    public void nextPage(ActionEvent event) {
+    public void nextPage() throws IOException {
         if (current_lesson == 1) {
             current_page1++;
+            setNew_Page(current_page1, list_of_pages1);
+            current_prog_lesson1 += prog_lesson1;
+            pb1.setProgress(current_prog_lesson1);
         }
         else if (current_lesson == 2) {
             current_page2++;
+            setNew_Page(current_page2, list_of_pages2);
+            current_prog_lesson2 += prog_lesson2;
+            pb2.setProgress(current_prog_lesson2);
+
         }
         else if (current_lesson == 3) {
             current_page3++;
+            setNew_Page(current_page3, list_of_pages3);
+            current_prog_lesson3 += prog_lesson3;
+            pb3.setProgress(current_prog_lesson3);
         }
-        setNew_Page();
     }
 
 
-    public void prevPage(ActionEvent event) {
+
+    public void prevPage() throws IOException {
         if (current_lesson == 1) {
             current_page1--;
+            setNew_Page(current_page1, list_of_pages1);
+            current_prog_lesson1 -= prog_lesson1;
+            pb1.setProgress(current_prog_lesson1);
         }
         else if (current_lesson == 2) {
             current_page2--;
+            setNew_Page(current_page2, list_of_pages2);
+            current_prog_lesson2 -= prog_lesson2;
+            pb2.setProgress(current_prog_lesson2);
         }
         else if (current_lesson == 3) {
             current_page3--;
+            setNew_Page(current_page3, list_of_pages3);
+            current_prog_lesson3 -= prog_lesson3;
+            pb3.setProgress(current_prog_lesson3);
         }
-        setNew_Page();
     }
+
 
 
 }

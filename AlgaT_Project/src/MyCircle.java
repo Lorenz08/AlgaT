@@ -15,12 +15,18 @@ public class MyCircle extends Circle {
 
     public MyCircle(double centerX, double centerY, double radius, Integer lvl) {
         super(centerX, centerY, radius);
+        setFill(Color.BLACK);
+        //setOnMouseEntered(event -> setFill(Color.YELLOW));
+        //setOnMouseExited(event -> setFill(Color.BLACK));
         levelNode = lvl;
         sxList = null;
         ccList = null;
         dxList = null;
         hasChildren = false;
     }
+
+
+
 
     public Integer getLevelNode(){
         return levelNode;
@@ -49,4 +55,3 @@ public class MyCircle extends Circle {
 
 
 }
-
