@@ -91,38 +91,29 @@ public class ExerciseClass extends Main implements Initializable{
         setPage(current_exercise, tmp);
     }
 
+
     //crea la lista di pagine delle esercitazioni da svolgere
     //tmp = file tct con le domande e risposte
     //list = lista delle pagine dell'esercitazione
     private void creat_list_exercise_Pages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
-        Integer i = 0;
         String complete_page = "";
-        String[] risposte = new String[4];
         String line_of_page_to_add;
         Image image_to_load = null;
+        String[] risposte = new String[4];
+
         //finche il file non e finito
         while ((line_of_page_to_add = tmp.readLine())!= null) {
             //se esiste il file
-            if (line_of_page_to_add.startsWith("TXT:")){
+            if (line_of_page_to_add.startsWith("TXT:")) {
                 //se il file inizia con TXT: , rimpiazzalo con ""
                 line_of_page_to_add = line_of_page_to_add.replace("TXT:", "");
-                char control = line_of_page_to_add.charAt(line_of_page_to_add.length() - 1);
-                //se dopo la linea TXT: trovo un #
-                if (control == '#') {
-                    //rimuovo il #
-                    line_of_page_to_add = line_of_page_to_add.replace("#", "");
-                    //vai a capo
-                    complete_page = complete_page.concat(line_of_page_to_add);
-                    complete_page += '\n';
-                }
-                else complete_page = complete_page.concat(line_of_page_to_add);
+                complete_page = complete_page.concat(line_of_page_to_add);
             }
-            else if (line_of_page_to_add.startsWith("IMG:")){
-                //se trovo IMG:
+            if (line_of_page_to_add.startsWith("IMG:")){
                 line_of_page_to_add = line_of_page_to_add.replace("IMG:", "");
                 //rimuovo IMG: e se non ce nessuna immagine non caricare nulla
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
-                    //altrimenti crea una nuova instanza di immagine
+                //altrimenti crea una nuova instanza di immagine
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }else if(line_of_page_to_add.startsWith("CK1:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK1:", "");
@@ -138,20 +129,19 @@ public class ExerciseClass extends Main implements Initializable{
                 risposte[3]=line_of_page_to_add;
             }
             //se inizia con END crea una nuova pagina aggiungendo il testo e l'immagine, aggiungila alla lista dell'esercitazione e incrementa il contatore delle pagine
-            else if (line_of_page_to_add.startsWith("END")){
-                Page newP = new Page(i, complete_page, image_to_load,risposte);
+            if (line_of_page_to_add.startsWith("END")){
+                Page newP = new Page(complete_page, image_to_load,risposte);
                 list.add(newP);
                 complete_page = "";
-                i++;
             }
         }
         //chiudi il file
         tmp.close();
     }
-
+    
     // setta il numero di esercitazione da svolgere
     public void setPage(Integer currentExercise, LinkedList<Page> list){
-        Page nPage = new Page(0,"",null);
+        Page nPage = new Page("",null);
         switch (currentExercise){
             case 1:
                 nPage = list.get(current_exercize_page1);
