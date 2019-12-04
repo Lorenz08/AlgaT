@@ -1,30 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="windowww" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SimulatorClass">
+<AnchorPane fx:id="windowww" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00bbff16" height="80.0" layoutX="300.0" layoutY="400.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" width="300.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
-         <cursor>
-            <Cursor fx:constant="NONE" />
-         </cursor>
-      </Rectangle>
       <Label alignment="CENTER" layoutX="228.0" layoutY="26.0" text="Simulator" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="36.0" />
          </font></Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="288.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteNode" prefHeight="60.0" prefWidth="80.0" text="DELETE &#10;  NODE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="232.0" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="387.0" layoutY="410.0" mnemonicParsing="false" onAction="#addNode" prefHeight="60.0" prefWidth="80.0" text=" ADD &#10;NODE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="130.0" />
-      <RadioButton fx:id="SX" layoutX="472.0" layoutY="410.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="SINISTRA" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="20.0" />
-      <RadioButton fx:id="CC" layoutX="472.0" layoutY="430.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="CENTRALE" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="20.0" />
-      <RadioButton fx:id="DX" layoutX="472.0" layoutY="450.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="DESTRA" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="20.0" />
-      <Line endX="100.0" endY="239.0" layoutX="280.0" layoutY="240.0" startX="100.0" startY="158.0" strokeWidth="2.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="220.0" />
    </children>
 </AnchorPane>
