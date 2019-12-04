@@ -33,12 +33,12 @@ public class LessonClass extends Main implements Initializable {
     @FXML private ProgressBar pb2;
     @FXML private ProgressBar pb3;
 
-    double current_prog_lesson1 = 0;
-    double current_prog_lesson2 = 0;
-    double current_prog_lesson3 = 0;
-    double prog_lesson1 = 0;
-    double prog_lesson2 = 0;
-    double prog_lesson3 = 0;
+    private double current_prog_lesson1 = 0;
+    private double current_prog_lesson2 = 0;
+    private double current_prog_lesson3 = 0;
+    private double prog_lesson1 = 0;
+    private double prog_lesson2 = 0;
+    private double prog_lesson3 = 0;
 
 
 
