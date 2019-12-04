@@ -20,6 +20,8 @@ public class ExerciseClass extends Main implements Initializable{
 
     private boolean complete = false;
     private boolean is_showSolution = true;
+//    private boolean complete2= false;
+//    private boolean complete3 = false;
 
 
     private Integer current_exercize_page1 = 0;
@@ -76,9 +78,9 @@ public class ExerciseClass extends Main implements Initializable{
 
     private void creat_listPages_of_all_Exercise(Integer i, LinkedList<Page> tmp) throws IOException {
         String x = "";
-        if (current_exercise == 1) x = "Text_file/Test/TxtExercise1";
-        if (current_exercise == 2) x = "Text_file/Test/TxtExercise2";
-        if (current_exercise == 3) x = "Text_file/Test/TxtExercise3";
+        if (current_exercise == 1) x = "Text_file/TxtExercise1";
+        if (current_exercise == 2) x = "Text_file/TxtExercise2";
+        if (current_exercise == 3) x = "Text_file/TxtExercise3";
         InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
@@ -215,7 +217,7 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
-    public void nextPage() throws IOException{
+    public void nextPage(ActionEvent event) throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1++;
@@ -227,7 +229,7 @@ public class ExerciseClass extends Main implements Initializable{
         setNew_Page();
     }
 
-    public void prevPage() throws IOException{
+    public void prevPage(ActionEvent event) throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1--;
@@ -240,4 +242,8 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
 }
+
+
+
+
 

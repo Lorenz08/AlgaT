@@ -12,8 +12,6 @@ public class Page {
         text = txt;
     }
 
-
-
     Page(Integer i, String txt, Image img ,String[] risposte) {
         super();
         number_of_page = i;
