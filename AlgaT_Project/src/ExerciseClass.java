@@ -173,12 +173,12 @@ public class ExerciseClass extends Main implements Initializable{
 
 
     private void setPage(){
-        if (current_lesson == 1) xxx(Label1, ImageView1, list_of_pages1, current_exercize_page1);
-        else if (current_lesson == 2) xxx(Label2, ImageView2, list_of_pages2, current_exercize_page2);
-        else if (current_lesson == 3) xxx(Label3, ImageView3,list_of_pages3,current_exercize_page3);
+        if (current_lesson == 1) setPage(Label1, ImageView1, list_of_pages1, current_exercize_page1);
+        else if (current_lesson == 2) setPage(Label2, ImageView2, list_of_pages2, current_exercize_page2);
+        else if (current_lesson == 3) setPage(Label3, ImageView3,list_of_pages3,current_exercize_page3);
     }
 
-    private void xxx(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
+    private void setPage(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
         Page nPage = list.get((int) currentl);
         l1.setText(nPage.getText());
         l1.setTextAlignment(TextAlignment.CENTER);
@@ -252,16 +252,19 @@ public class ExerciseClass extends Main implements Initializable{
                 setNew_Page(current_exercize_page1, list_of_pages1);
                 current_prog_exercize1 -= prog_exercize2;
                 pb1.setProgress(current_prog_exercize1);
+                break;
             case 2:
                 current_exercize_page2--;
                 setNew_Page(current_exercize_page2, list_of_pages2);
                 current_prog_exercize2 -= prog_exercize2;
                 pb1.setProgress(current_prog_exercize2);
+                break;
             case 3:
                 current_exercize_page3--;
                 setNew_Page(current_exercize_page3, list_of_pages3);
                 current_prog_exercize3 -= prog_exercize3;
                 pb1.setProgress(current_prog_exercize3);
+                break;
         }
     }
 
