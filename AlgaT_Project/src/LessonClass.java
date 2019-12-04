@@ -37,13 +37,14 @@ public class LessonClass extends Main implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            xxx(current_lesson);
+            creat_listPages_of_current_lesson(current_lesson);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void xxx(Integer i) throws IOException {
+
+    public void creat_listPages_of_current_lesson(Integer i) throws IOException {
         if (i == 1){
             list_of_pages1 = new LinkedList<Page>();
             creat_listPages_of_all_lessons(number_of_pages_of_lesson1, list_of_pages1);
@@ -56,12 +57,11 @@ public class LessonClass extends Main implements Initializable {
             list_of_pages3 = new LinkedList<Page>();
             creat_listPages_of_all_lessons(number_of_pages_of_lesson3, list_of_pages3);
         }
-
     }
 
 
 
-    private void creat_listPages_of_all_lessons(Integer i, LinkedList<Page> tmp) throws IOException {
+    private void creat_listPages_of_all_lessons(Integer numberOfPage, LinkedList<Page> listOfPage) throws IOException {
         String x = "";
         if (current_lesson == 1) x = "Text_file/TxtLesson1";
         if (current_lesson == 2) x = "Text_file/TxtLesson2";
@@ -69,9 +69,8 @@ public class LessonClass extends Main implements Initializable {
         InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
-        creat_listPages(file_to_read, tmp);
-        i = tmp.size();
-        setPage(current_lesson, tmp);
+        creat_listPages(file_to_read, listOfPage);
+        setPage(current_lesson, listOfPage);
     }
 
 
@@ -92,11 +91,15 @@ public class LessonClass extends Main implements Initializable {
                 }
                 else complete_page = complete_page.concat(line_of_page_to_add);
             }
+
+
             if (line_of_page_to_add.startsWith("IMG:")){
                 line_of_page_to_add = line_of_page_to_add.replace("IMG:", "");
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }
+
+
             if (line_of_page_to_add.startsWith("END")){
                 Page newP = new Page(i, complete_page, image_to_load);
                 list.add(newP);
@@ -127,43 +130,35 @@ public class LessonClass extends Main implements Initializable {
     }
 
 
-    public void setNew_Page(){
+    public void setNew_Page() throws IOException {
         LinkedList<Page> tmp = new LinkedList<Page>();
         Integer x = 0;
         if (current_lesson == 1) {
             x = current_page1;
             tmp = list_of_pages1;
-        }
-        else if (current_lesson == 2) {
+        } else if (current_lesson == 2) {
             x = current_page2;
             tmp = list_of_pages2;
-        }
-        else if (current_lesson == 3) {
+        } else if (current_lesson == 3) {
             x = current_page3;
             tmp = list_of_pages3;
         }
-        try {
-            if (x == tmp.size()){
-                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
-                Scene simulatorScene = new Scene(simulatorLayout);
-                window.setScene(simulatorScene);
-            }
-            else if (x < 0){
-                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
-                Scene simulatorScene = new Scene(simulatorLayout);
-                window.setScene(simulatorScene);
-            }
-            else{
-                setPage(current_lesson, tmp);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        if (x == tmp.size()) {
+            Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
+            Scene simulatorScene = new Scene(simulatorLayout);
+            window.setScene(simulatorScene);
+        } else if (x < 0) {
+            Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
+            Scene simulatorScene = new Scene(simulatorLayout);
+            window.setScene(simulatorScene);
+        } else {
+            setPage(current_lesson, tmp);
         }
     }
 
 
-    public void nextPage(ActionEvent event) {
+
+    public void nextPage(ActionEvent event) throws IOException {
         if (current_lesson == 1) {
            current_page1++;
         }
@@ -177,7 +172,7 @@ public class LessonClass extends Main implements Initializable {
     }
 
 
-    public void prevPage(ActionEvent event) {
+    public void prevPage(ActionEvent event) throws IOException {
         if (current_lesson == 1) {
             current_page1--;
         }
