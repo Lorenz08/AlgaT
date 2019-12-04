@@ -5,12 +5,24 @@ public class Page {
     private Integer number_of_page;
     private Image image;
     private String text;
+    private String[] value = new String[4];
 
-    Page(Integer i, String txt, Image img) {
+    Page(Integer i, String txt, Image img ,String[] risposte) {
         super();
         number_of_page = i;
         image = img;
         text = txt;
+        value = risposte;
+    }
+    Page(Integer i, String txt, Image img ) {
+        super();
+        number_of_page = i;
+        image = img;
+        text = txt;
+    }
+
+    public String getValue(Integer i) {
+        return value[i];
     }
 
     public Image getImage() {

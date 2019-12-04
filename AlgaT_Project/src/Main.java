@@ -21,7 +21,6 @@ public class Main extends Application {
     //"puntatore" alla lezione corrente
     public static Integer current_lesson = 0;
     //"puntatore" all'esercitazione corrente
-
     public static Integer current_exercise = 0;
 
     public static boolean b = true;
@@ -30,7 +29,12 @@ public class Main extends Application {
     public static boolean ok_exercise1 = false;
     public static boolean ok_exercise2 = false;
     public static boolean ok_exercise3 = false;
-
+    public static Stage simulator_window = new Stage();
+    public static boolean simulatorIsActive = false;
+    public static boolean errorWindowIsActive = false;
+    public static Stage error_window = new Stage();
+    @FXML private Button okButton;
+    @FXML private Label l1;
 
 
 
@@ -77,7 +81,7 @@ public class Main extends Application {
                 simulator_window.setHeight(500);
                 simulator_window.setResizable(false);
                 simulator_window.setOnCloseRequest(event1 -> simulatorIsActive = false);
-                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/SimulatorScene.fxml"));
+                Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Simulator/SimulatorScene.fxml"));
                 Scene simulatorScene = new Scene(simulatorLayout);
                 simulator_window.setScene(simulatorScene);
                 simulator_window.show();
