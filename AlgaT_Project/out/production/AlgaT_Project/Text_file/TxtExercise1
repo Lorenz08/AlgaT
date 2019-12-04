@@ -1,0 +1,40 @@
+﻿TXT:FILE DI TESTO PER LA LEZIONE 1
+TXT: Un albero per mantenere un ordinamento ha bisogno di avere… che tipo di informazione?
+CK1: Chiave-valore
+CK2: Chiave-nome
+CK3: Nome-cognome
+CK4: Padre-figlio
+IMG:/Images/unnamed.jpg
+END
+TXT:Dom2 : La sigla ABR sta per…
+CK1: albero binario di ricerca
+CK2: Albero Bilanciato di ricerca
+CK3: Albero Bianco di ricerca
+CK4: Albero black red
+IMG:null
+END
+TXT:Dom3 :
+CK1:check1
+CK2:check2
+CK3:check3
+CK4:check4
+IMG:null
+END
+TXT:Dom4 :
+CK1:check1
+CK2:check2
+CK3:check3
+CK4:check4
+IMG:null
+END
+TXT:Dom5 :
+CK1:check1
+CK2:check2
+CK3:check3
+CK4:check4
+IMG:/Images/unnamed.jpg
+END
+
+
+
+

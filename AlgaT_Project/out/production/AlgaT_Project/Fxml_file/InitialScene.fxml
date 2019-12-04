@@ -5,23 +5,39 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeController">
+<AnchorPane prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeController">
    <children>
       <Button layoutX="28.0" layoutY="411.0" mnemonicParsing="false" onAction="#simulatorButton" prefHeight="53.0" prefWidth="177.0" text="Simulator" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
-      <Label layoutX="157.0" layoutY="41.0" text="Tutorial su gli alberi bilanciati">
+      <Label layoutX="175.0" layoutY="50.0" text="Tutorial su gli alberi bilanciati">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="132.0" layoutY="88.0" prefHeight="182.0" prefWidth="337.0" text="Tutoria che spiega come gli alberi bilanciati &#10;salvano la foresta insieme a Greta Thenberg" />
-      <MenuButton layoutX="27.0" layoutY="298.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="180.0" text="Lesson Menu">
-        <items>
-          <MenuItem mnemonicParsing="false" onAction="#buttomLesson1" text="Lesson 1" />
-          <MenuItem mnemonicParsing="false" onAction="#buttomLesson2" text="Lesson 2" />
-            <MenuItem mnemonicParsing="false" onAction="#buttomLesson3" text="Lesson 3" />
-        </items>
-      </MenuButton>
+      <Label alignment="CENTER" layoutX="162.0" layoutY="114.0" prefHeight="114.0" prefWidth="337.0" text="Tutoria che spiega come gli alberi bilanciati &#10;salvano la foresta insieme a Greta Thenberg" />
+      <VBox layoutX="37.0" layoutY="238.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <MenuButton mnemonicParsing="false" prefHeight="43.0" prefWidth="173.0" text="Lesson Menu">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#buttonLesson1" text="Lesson 1" />
+                <MenuItem mnemonicParsing="false" onAction="#buttonLesson2" text="Lesson 2" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonLesson3" text="Lesson 3" />
+              </items>
+            </MenuButton>
+         </children>
+      </VBox>
+      <VBox layoutX="162.0" layoutY="238.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <MenuButton mnemonicParsing="false" prefHeight="43.0" prefWidth="173.0" text="Exercize Menu">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#buttonExercise1" text="Exercize1" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonExercise2" text="Exercize2" />
+                  <MenuItem mnemonicParsing="false" onAction="#buttonExercise3" text="Exercise3" />
+               </items>
+            </MenuButton>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
