@@ -6,8 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.TextAlignment;
 
 
 import java.io.*;
@@ -27,6 +29,17 @@ public class ExerciseClass extends Main implements Initializable{
     private Integer current_exercize_page1 = 0;
     private Integer current_exercize_page2 = 0;
     private Integer current_exercize_page3 = 0;
+
+    private double current_prog_exercize1 = 0;
+    private double current_prog_exercize2 = 0;
+    private double current_prog_exercize3 = 0;
+    private double prog_exercize1 = 0;
+    private double prog_exercize2 = 0;
+    private double prog_exercize3 = 0;
+    @FXML private ProgressBar pb1;
+    @FXML private ProgressBar pb2;
+    @FXML private ProgressBar pb3;
+
 
     private LinkedList<Page> list_of_pages1 = null;
     private LinkedList<Page> list_of_pages2 = null;
@@ -57,7 +70,7 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     //crea la lista di pagine da vedere
-    public void inizializzaEsercitazioni(Integer i) throws IOException {
+    private void inizializzaEsercitazioni(Integer i) throws IOException {
         if (i == 1){
             //lista delle pagine della prima lezione
             list_of_pages1 = new LinkedList<Page>();
@@ -138,7 +151,7 @@ public class ExerciseClass extends Main implements Initializable{
         //chiudi il file
         tmp.close();
     }
-    
+
     // setta il numero di esercitazione da svolgere
     public void setPage(Integer currentExercise, LinkedList<Page> list){
         Page nPage = new Page("",null);
@@ -158,36 +171,38 @@ public class ExerciseClass extends Main implements Initializable{
         ImageView1.setImage(nPage.getImage());
     }
 
-    public void setNew_Page() throws IOException {
-        LinkedList<Page> tmp = new LinkedList<Page>();
-        Integer x = 0;
 
-        switch (current_exercise) {
-            case 1:
-                x = current_exercize_page1;
-                tmp = list_of_pages1;
-            case 2:
-                x = current_exercize_page2;
-                tmp = list_of_pages2;
-            case 3:
-                x = current_exercize_page3;
-                tmp = list_of_pages3;
-        }
-        if (x == tmp.size() && complete){
-            //sblocco delle lezioni
-            switch (current_exercise){
+    private void setPage(){
+        if (current_lesson == 1) xxx(Label1, ImageView1, list_of_pages1, current_exercize_page1);
+        else if (current_lesson == 2) xxx(Label2, ImageView2, list_of_pages2, current_exercize_page2);
+        else if (current_lesson == 3) xxx(Label3, ImageView3,list_of_pages3,current_exercize_page3);
+    }
+
+    private void xxx(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
+        Page nPage = list.get((int) currentl);
+        l1.setText(nPage.getText());
+        l1.setTextAlignment(TextAlignment.CENTER);
+        l1.setWrapText(true);
+        img1.setImage(nPage.getImage());
+    }
+
+    private void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
+        if (currentLess == list.size()){
+            //sblocco degli esercizi
+            switch (current_lesson){
                 case 1:
-                    ok_lesson2 = true;
+                    ok_exercise1 = true;
                 case 2:
-                    ok_lesson3 = true;
+                    ok_exercise2 = true;
+                case 3:
+                    ok_exercise3 = true;
             }
             showHome();
-        }else if(x == tmp.size())
-            setPage(current_exercise, tmp);
-        else if (x < 0){
+        } else if (currentLess < 0) {
             showHome();
-        }else
-            setPage(current_exercise, tmp);
+        } else {
+            setPage();
+        }
     }
 
     private void showHome() throws IOException {
@@ -211,24 +226,43 @@ public class ExerciseClass extends Main implements Initializable{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1++;
+                setNew_Page(current_exercize_page1, list_of_pages1);
+                current_prog_exercize1 += prog_exercize1;
+                pb1.setProgress(current_prog_exercize1);
+                break;
             case 2:
                 current_exercize_page2++;
+                setNew_Page(current_exercize_page2, list_of_pages2);
+                current_prog_exercize2 += prog_exercize2;
+                pb2.setProgress(current_prog_exercize2);
+                break;
             case 3:
                 current_exercize_page3++;
+                setNew_Page(current_exercize_page3, list_of_pages3);
+                current_prog_exercize3 += prog_exercize3;
+                pb3.setProgress(current_prog_exercize3);
+                break;
         }
-        setNew_Page();
     }
 
     public void prevPage(ActionEvent event) throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1--;
+                setNew_Page(current_exercize_page1, list_of_pages1);
+                current_prog_exercize1 -= prog_exercize2;
+                pb1.setProgress(current_prog_exercize1);
             case 2:
                 current_exercize_page2--;
+                setNew_Page(current_exercize_page2, list_of_pages2);
+                current_prog_exercize2 -= prog_exercize2;
+                pb1.setProgress(current_prog_exercize2);
             case 3:
                 current_exercize_page3--;
+                setNew_Page(current_exercize_page3, list_of_pages3);
+                current_prog_exercize3 -= prog_exercize3;
+                pb1.setProgress(current_prog_exercize3);
         }
-        setNew_Page();
     }
 
 }
