@@ -1,37 +1,17 @@
 ﻿TXT:FILE DI TESTO PER LA LEZIONE 2
-TXT:Dom1
-CK1:check1
-CK2:check2
-CK3:check3 (corretta)
-CK4:check4
-IMG:/Images/unnamed.jpg
-END
-TXT:Dom2
-CK1:check1
-CK2:check2
-CK3:check3 (corretta)
-CK4:check4
-IMG:Images/unnamed.jpg
-END
-TXT:Dom3
-CK1:check1
-CK2:check2
-CK3:check3 (corretta)
-CK4:check4
+TXT:Dom1 : Il sottoalbero con radice u contiene almeno…
+CK1: b(u) + 1 nodi interni.
+CK2: b(u) - 1 nodi interni.
+CK3: 2^b(u) - 1 nodi interni.
+CK4: Log(b(u)) - 1 nodi interni.
 IMG:null
 END
-TXT:Dom4
-CK1:check1
-CK2:check2
-CK3:check3 (corretta)
-CK4:check4
-IMG:null
+TXT:Dom2 : L’altezza di un albero red-balck con n nodi interni e’ al piu’…
+CK1: log(n+1).
+CK2: n+1
+CK3: 2log(n+1).
+CK4: 2log(h+1).
+IMG:/Images/rb2.png
 END
-TXT:Dom5
-CK1:check1
-CK2:check2
-CK3:check3 (corretta)
-CK4:check4
-IMG:null
-END
+
 

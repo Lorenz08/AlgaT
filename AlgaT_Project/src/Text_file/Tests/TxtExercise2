@@ -1,37 +1,37 @@
 ﻿TXT:FILE DI TESTO PER LA LEZIONE 2
-TXT:Dom1
-CK1:check1
-CK2:check2 (corretta)
-CK3:check3
-CK4:check4
-IMG:/Images/unnamed.jpg
-END
-TXT:Dom2
-CK1:check1
-CK2:check2 (corretta)
-CK3:check3
-CK4:check4
-IMG:Images/unnamed.jpg
-END
-TXT:Dom3
-CK1:check1
-CK2:check2 (corretta)
-CK3:check3
-CK4:check4
+TXT:Dom1 : Usando un ABR la complessita’ delle singole operazioni vale…
+CK1: 0(h-1)
+CK2: 0(h)
+CK3: 0(n-1)
+CK4: 0(h-n)
 IMG:null
 END
-TXT:Dom4
-CK1:check1
-CK2:check2 (corretta)
-CK3:check3
-CK4:check4
+TXT:Dom2 : Un albero e perfettamente bilanciato  se…
+CK1: Se tutte le foglie non si trovano allo stesso livello
+CK2: se tutte le foglie si trovano allo stesso livello (corretta)
+CK3: se tutte le foglie si trovano allo stesso livello e sono di numero pari
+CK4: nessuna delle precedenti
 IMG:null
 END
-TXT:Dom5
-CK1:check1
-CK2:check2 (corretta)
-CK3:check3
-CK4:check4
+TXT:Dom3 : Le strutture di bilanciamento cosa cercano di minimizzare?
+CK1: Il numero di nodi dell’albero
+CK2: L’altezza dell’albero (corretta)
+CK3: Le complessita’ delle operazioni da svolgere sugli ABR
+CK4: Tutte le precedenti
+IMG:null
+END
+TXT:Dom4 : Nelle strutture di bilanciamento cosa rende piu’ costose le operazioni di inserimento e cancellazione?
+CK1: Robustezza
+CK2: Rigidita’ (corretta)
+CK3: Flessibilita’
+CK4: Nessuna delle precedenti
+IMG:null
+END
+TXT:Dom5 : Come si chiama l’altezza nera della radice in un albero red-black?
+CK1: Altezza dell’albero
+CK2: Altezza nera dell’albero (corretta)
+CK3: Altezza
+CK4: Altezza rossa dell’albero
 IMG:null
 END
 
