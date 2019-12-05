@@ -7,6 +7,11 @@ public class Page {
     private String text;
     private String[] value = new String[4];
 
+    Page(String txt, Image img) {
+        image = img;
+        text = txt;
+    }
+
     Page(Integer i, String txt, Image img ,String[] risposte) {
         super();
         number_of_page = i;
@@ -32,5 +37,6 @@ public class Page {
     public String getText() {
         return(text);
     }
+
 
 }
