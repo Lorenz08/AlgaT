@@ -1,11 +1,59 @@
-﻿TXT:FILE DI TESTO PER LA LEZIONE 1
-TXT:1
+﻿TXT:FILE DI TESTO PER LA LEZIONE 2
+
+TXT:Usando un ABR la complessita’ delle singole operazioni vale 0(h), h e 0(n) solo nel caso pessimo.
+TXT:E’ possibile modificare la struttura introducendo opportuni metodi di bilanciamento che permettono di contenere h entro 0(log n).
 IMG:null
 END
-TXT:2
+
+TXT:Esistono diversi metodi di questo tipo:
+TXT:    -	Alberi AVL (Aderson-Velskii e Landis, 1962)
+TXT:    -	B-tree (Bayer, McCreight,1972)
+TXT:    -	Alberi Red-Black (Bayer, 1972)
+TXT:    -	Alberi 2-3 (Hopcroft,1983)
+TXT:    -	B-tree (Anderson, 1993)
+TXT:    Tutte queste strutture sono caratterizzate dalla stessa limitazione superiore 0(log n) per l’altezza dell’albero.
 IMG:null
 END
-TXT:3
+
+TXT:Alberi RED-BLACK
+#
+TXT:    Fissato un numero n di nodi e un numero massimo d di fogli per nodo (ad esempio d=2 per gli alberi binari), l’albero perfettamente bilanciato e’ quello con altezza minima tra tutti gli alberi con le stesse caratteristiche.
+IMG:null
+END
+
+TXT:Alberi perfettamente bilanciati
+TXT:    -	B-tree
+TXT:    -	Alberi 2-3
+TXT:    Un albero e invece k-bilanciato se per ogni nodo u , la massima differenza di altezza tra tutti i sottoalberi di u e’ pari a k.
+TXT:    -	Alberi AVL, alberi 1-bilanciati
+IMG:null
+END
+
+TXT:Tutte queste strutture dati cercano di minimizzare l’altezza dell’albero, al fine di limitare il numero di livelli che devono essere esplorati per trovare una chiave.
+TXT:    Ma la rigidita’ delle loro strutture rende piu’ costose le operazioni di inserimento e cancellazione, che richiedono complesse ristrutturazioni dell’albero per evitare sbilanciamenti.
+TXT:    Gli alberi red-black riducono le operazioni di ristrutturazione senza pero rinunciare ad un’altezza limitata superiormente da 0(log n).
+IMG:null
+END
+
+TXT:Un albero Red-Black e’ un ABR in cui ogni nodo ha un attributo aggiuntivo color, che puo valere red o black. Oltre ai soliti requisiti degli alberi binari di ricerca, per gli alberi red-balck devono valere anche:
+TXT:    v1) la radice e nera
+TXT:    v2) tutte le foglie sono nere
+TXT:    v3) entrambi i figli di un nodo rosso sono neri
+TXT:    v4) tutti i cammini semplici da un nodo u ad una delle foglie contenute nel sottoalbero radicato in   u hanno lo stesso numero di nodi neri.
+#
+TXT:    Nota: Le foglie di un albero red-balck non contengono alcun dato.
+IMG:null
+END
+
+TXT:Il numero di nodi neri lungo un percorso da un nodo u(escluso) ad una qualsiasi foglia e’ detto altezza nera di u ed e indicato con b(u).
+#
+TXT:    Questo valore e’ ben definito in quanto tutti i percorsi di questo tipo hanno lo stesso numero di nodi neri per il vincolo v4), L’altezza nera della radice e’ detta altezza nera dell’albero.
+IMG:null
+END
+
+IMG:null
+END
+
 IMG:null
 END
 

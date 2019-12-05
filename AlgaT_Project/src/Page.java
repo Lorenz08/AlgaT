@@ -2,7 +2,6 @@ import javafx.scene.image.Image;
 
 public class Page {
 
-    private Integer number_of_page;
     private Image image;
     private String text;
     private String[] value = new String[4];
@@ -18,19 +17,13 @@ public class Page {
         text = txt;
         value = risposte;
     }
-//    Page(Integer i, String txt, Image img ) {
-//        super();
-//        number_of_page = i;
-//        image = img;
-//        text = txt;
-//    }
 
-    public String getValue(Integer i) {
-        return value[i];
+    protected Image getImage() {
+        return(image);
     }
 
-    public Image getImage() {
-        return(image);
+    protected String getValue(Integer i) {
+        return value[i];
     }
 
     public String getText() {
