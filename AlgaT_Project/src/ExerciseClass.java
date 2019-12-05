@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextAlignment;
@@ -37,10 +39,12 @@ public class ExerciseClass extends Main implements Initializable{
     @FXML private Label LabelDomanda;
     @FXML private Label solution;
     @FXML private ImageView ImageView1;
-    @FXML private CheckBox value1;
-    @FXML private CheckBox value2;
-    @FXML private CheckBox value3;
-    @FXML private CheckBox value4;
+    @FXML private RadioButton value1;
+    @FXML private RadioButton value2;
+    @FXML private RadioButton value3;
+    @FXML private RadioButton value4;
+    @FXML private ToggleGroup group ;
+
 
     /* METHODS */
     @Override
@@ -48,9 +52,18 @@ public class ExerciseClass extends Main implements Initializable{
         try {
             inizializzaEsercitazioni();
             setSolutionNoVisible();
+            setRadioButtonGroup();
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private void setRadioButtonGroup() {
+        group = new ToggleGroup();
+        value1.setToggleGroup(group);
+        value2.setToggleGroup(group);
+        value3.setToggleGroup(group);
+        value4.setToggleGroup(group);
     }
 
     //crea la lista di pagine da vedere
@@ -58,9 +71,9 @@ public class ExerciseClass extends Main implements Initializable{
         list_of_pages1 = new LinkedList<Page>();
         list_of_pages2 = new LinkedList<Page>();
         list_of_pages3 = new LinkedList<Page>();
-        creat_listPages_of_all_Exercise(list_of_pages1, "Text_file/Tests/TxtLesson1" );
-        creat_listPages_of_all_Exercise(list_of_pages2, "Text_file/Tests/TxtLesson2");
-        creat_listPages_of_all_Exercise(list_of_pages3, "Text_file/Tests/TxtLesson3");
+        creat_listPages_of_all_Exercise(list_of_pages1, "Text_file/Tests/TxtExercise1" );
+        creat_listPages_of_all_Exercise(list_of_pages2, "Text_file/Tests/TxtExercise2");
+        creat_listPages_of_all_Exercise(list_of_pages3, "Text_file/Tests/TxtExercise3");
         setPage();
     }
 
@@ -110,7 +123,7 @@ public class ExerciseClass extends Main implements Initializable{
             }
             //se inizia con END crea una nuova pagina aggiungendo il testo e l'immagine, aggiungila alla lista dell'esercitazione e incrementa il contatore delle pagine
             if (line_of_page_to_add.startsWith("END")){
-                Page newP = new Page(complete_page, image_to_load,answers);
+                Page newP = new Page(complete_page, image_to_load, answers);
                 list.add(newP);
                 complete_page = "";
             }
@@ -134,20 +147,32 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
-    private void setPage(Label LabelDom, ImageView img1, CheckBox value1, CheckBox value2, CheckBox value3, CheckBox value4 ,LinkedList<Page> list, double currentl){
+    private void setPage(Label LabelDom, ImageView img1, RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4 ,LinkedList<Page> list, double currentl){
         Page nPage = list.get((int) currentl);
+        setTitle();
         LabelDom.setText(nPage.getText());
         LabelDom.setTextAlignment(TextAlignment.CENTER);
         LabelDom.setWrapText(true);
-        SetValueCheckBox(value1, nPage, 0);
-        SetValueCheckBox(value2, nPage, 1);
-        SetValueCheckBox(value3, nPage, 2);
-        SetValueCheckBox(value4, nPage, 3);
+        SetValueRadioButton(value1, nPage, 0);
+        SetValueRadioButton(value2, nPage, 1);
+        SetValueRadioButton(value3, nPage, 2);
+        SetValueRadioButton(value4, nPage, 3);
         img1.setImage(nPage.getImage());
     }
 
-    private void SetValueCheckBox(CheckBox value, Page nPage, int i) {
+    private void SetValueRadioButton(RadioButton value, Page nPage, int i) {
         value.setText(nPage.getValue(i));
+    }
+
+    private void setTitle(){
+        switch (current_exercise){
+            case 2:
+                Title.setText("Test 2");
+                break;
+            case 3:
+                Title.setText("Test 3");
+                break;
+        }
     }
 
     private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {
@@ -165,12 +190,9 @@ public class ExerciseClass extends Main implements Initializable{
     private void setOkLessons() {
         switch (current_exercise){
             case 1:
-                ok_lesson1 = true;
-                break;
-            case 2:
                 ok_lesson2 = true;
                 break;
-            case 3:
+            case 2:
                 ok_lesson3 = true;
                 break;
         }
