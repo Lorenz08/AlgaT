@@ -6,11 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.TextAlignment;
-
 
 import java.io.*;
 import java.net.URL;
@@ -26,14 +24,14 @@ public class ExerciseClass extends Main implements Initializable{
     private Integer current_exercize_page1 = 0;
     private Integer current_exercize_page2 = 0;
     private Integer current_exercize_page3 = 0;
-    
+
     private LinkedList<Page> list_of_pages1 = null;
     private LinkedList<Page> list_of_pages2 = null;
     private LinkedList<Page> list_of_pages3 = null;
 
-    private Integer number_of_pages_of_exercise1 = 0;
-    private Integer number_of_pages_of_exercise2 = 0;
-    private Integer number_of_pages_of_exercise3 = 0;
+//    private Integer number_of_pages_of_exercise1 = 0;
+//    private Integer number_of_pages_of_exercise2 = 0;
+//    private Integer number_of_pages_of_exercise3 = 0;
 
     @FXML private Label Title;
     @FXML private Label LabelDomanda;
@@ -48,55 +46,40 @@ public class ExerciseClass extends Main implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            inizializzaEsercitazioni(current_exercise);
-            showSolution();
+            inizializzaEsercitazioni();
+            setSolutionNoVisible();
         }catch (IOException e){
             e.printStackTrace();
         }
     }
 
     //crea la lista di pagine da vedere
-    private void inizializzaEsercitazioni(Integer i) throws IOException {
-        switch (i){
-            case 1:
-                //lista delle pagine della prima lezione
-                list_of_pages1 = new LinkedList<Page>();
-                creat_listPages_of_all_Exercise(number_of_pages_of_exercise1, list_of_pages1);
-                break;
-            case 2:
-                //lista delle pagine della seconda lezione
-                list_of_pages2 = new LinkedList<Page>();
-                creat_listPages_of_all_Exercise(number_of_pages_of_exercise2, list_of_pages2);
-                break;
-            case 3:
-                //lista delle pagine della terza lezione
-                list_of_pages3 = new LinkedList<Page>();
-                creat_listPages_of_all_Exercise(number_of_pages_of_exercise3, list_of_pages3);
-                break;
-        }
+    private void inizializzaEsercitazioni() throws IOException {
+        list_of_pages1 = new LinkedList<Page>();
+        list_of_pages2 = new LinkedList<Page>();
+        list_of_pages3 = new LinkedList<Page>();
+        creat_listPages_of_all_Exercise(list_of_pages1, "Text_file/Tests/TxtLesson1" );
+        creat_listPages_of_all_Exercise(list_of_pages2, "Text_file/Tests/TxtLesson2");
+        creat_listPages_of_all_Exercise(list_of_pages3, "Text_file/Tests/TxtLesson3");
+        setPage();
     }
 
-    private void creat_listPages_of_all_Exercise(Integer i, LinkedList<Page> tmp) throws IOException {
-        String x = "";
-        if (current_exercise == 1) x = "Text_file/TxtExercise1";
-        if (current_exercise == 2) x = "Text_file/TxtExercise2";
-        if (current_exercise == 3) x = "Text_file/TxtExercise3";
-        InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
+    private void creat_listPages_of_all_Exercise(LinkedList<Page> listOfPage, String String) throws IOException {
+        InputStream file_to_open = getClass().getResourceAsStream(String);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
-        creat_list_exercise_Pages(file_to_read, tmp);
-        setPage(current_exercise, tmp);
+        creat_list_exercise_Pages(file_to_read, listOfPage);
     }
 
 
-    //crea la lista di pagine delle esercitazioni da svolgere
+    //crea la lista di pagine dell'esercitazione da svolgere
     //tmp = file tct con le domande e risposte
     //list = lista delle pagine dell'esercitazione
     private void creat_list_exercise_Pages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
         String complete_page = "";
         String line_of_page_to_add;
         Image image_to_load = null;
-        String[] risposte = new String[4];
+        String[] answers = new String[4];
 
         //finche il file non e finito
         while ((line_of_page_to_add = tmp.readLine())!= null) {
@@ -114,20 +97,20 @@ public class ExerciseClass extends Main implements Initializable{
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }else if(line_of_page_to_add.startsWith("CK1:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK1:", "");
-                risposte[0]=line_of_page_to_add;
+                answers[0]=line_of_page_to_add;
             }else if(line_of_page_to_add.startsWith("CK2:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK2:", "");
-                risposte[1]=line_of_page_to_add;
+                answers[1]=line_of_page_to_add;
             }else if(line_of_page_to_add.startsWith("CK3:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK3:", "");
-                risposte[2]=line_of_page_to_add;
+                answers[2]=line_of_page_to_add;
             }else if(line_of_page_to_add.startsWith("CK4:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK4:", "");
-                risposte[3]=line_of_page_to_add;
+                answers[3]=line_of_page_to_add;
             }
             //se inizia con END crea una nuova pagina aggiungendo il testo e l'immagine, aggiungila alla lista dell'esercitazione e incrementa il contatore delle pagine
             if (line_of_page_to_add.startsWith("END")){
-                Page newP = new Page(complete_page, image_to_load,risposte);
+                Page newP = new Page(complete_page, image_to_load,answers);
                 list.add(newP);
                 complete_page = "";
             }
@@ -136,41 +119,35 @@ public class ExerciseClass extends Main implements Initializable{
         tmp.close();
     }
 
-    // setta il numero di esercitazione da svolgere
-    public void setPage(Integer currentExercise, LinkedList<Page> list){
-        Page nPage = new Page("",null);
-        switch (currentExercise){
+    // compila il template con l'esercitazione corretta
+    private void setPage(){
+        switch (current_exercise){
             case 1:
-                nPage = list.get(current_exercize_page1);
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
                 break;
             case 2:
-                nPage = list.get(current_exercize_page2);
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
                 break;
             case 3:
-                nPage = list.get(current_exercize_page3);
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
                 break;
         }
-        LabelDomanda.setText(nPage.getText());
-        value1.setText(nPage.getValue(0));
-        value2.setText(nPage.getValue(1));
-        value3.setText(nPage.getValue(2));
-        value4.setText(nPage.getValue(3));
-        ImageView1.setImage(nPage.getImage());
     }
 
-
-    private void setPage(){
-        if (current_lesson == 1) setPage(Title, ImageView1, list_of_pages1, current_exercize_page1);
-        else if (current_lesson == 2) setPage(Title, ImageView1, list_of_pages2, current_exercize_page2);
-        else if (current_lesson == 3) setPage(Title, ImageView1,list_of_pages3,current_exercize_page3);
-    }
-
-    private void setPage(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
+    private void setPage(Label LabelDom, ImageView img1, CheckBox value1, CheckBox value2, CheckBox value3, CheckBox value4 ,LinkedList<Page> list, double currentl){
         Page nPage = list.get((int) currentl);
-        l1.setText(nPage.getText());
-        l1.setTextAlignment(TextAlignment.CENTER);
-        l1.setWrapText(true);
+        LabelDom.setText(nPage.getText());
+        LabelDom.setTextAlignment(TextAlignment.CENTER);
+        LabelDom.setWrapText(true);
+        SetValueCheckBox(value1, nPage, 0);
+        SetValueCheckBox(value2, nPage, 1);
+        SetValueCheckBox(value3, nPage, 2);
+        SetValueCheckBox(value4, nPage, 3);
         img1.setImage(nPage.getImage());
+    }
+
+    private void SetValueCheckBox(CheckBox value, Page nPage, int i) {
+        value.setText(nPage.getValue(i));
     }
 
     private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {

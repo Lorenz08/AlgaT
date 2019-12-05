@@ -18,19 +18,17 @@ public class Page {
         text = txt;
         value = risposte;
     }
-//    Page(Integer i, String txt, Image img ) {
-//        super();
-//        number_of_page = i;
-//        image = img;
-//        text = txt;
-//    }
 
-    public String getValue(Integer i) {
+    protected Image getImage() {
+        return(image);
+    }
+
+    protected String getValue(Integer i) {
         return value[i];
     }
 
-    public Image getImage() {
-        return(image);
+    public void setValue(Integer i,String value) {
+        this.value[i] = value;
     }
 
     public String getText() {
