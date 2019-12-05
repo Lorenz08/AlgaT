@@ -22,25 +22,11 @@ public class ExerciseClass extends Main implements Initializable{
 
     private boolean complete = false;
     private boolean is_showSolution = true;
-//    private boolean complete2= false;
-//    private boolean complete3 = false;
-
 
     private Integer current_exercize_page1 = 0;
     private Integer current_exercize_page2 = 0;
     private Integer current_exercize_page3 = 0;
-
-    private double current_prog_exercize1 = 0;
-    private double current_prog_exercize2 = 0;
-    private double current_prog_exercize3 = 0;
-    private double prog_exercize1 = 0;
-    private double prog_exercize2 = 0;
-    private double prog_exercize3 = 0;
-    @FXML private ProgressBar pb1;
-    @FXML private ProgressBar pb2;
-    @FXML private ProgressBar pb3;
-
-
+    
     private LinkedList<Page> list_of_pages1 = null;
     private LinkedList<Page> list_of_pages2 = null;
     private LinkedList<Page> list_of_pages3 = null;
@@ -50,7 +36,7 @@ public class ExerciseClass extends Main implements Initializable{
     private Integer number_of_pages_of_exercise3 = 0;
 
     @FXML private Label Title;
-    @FXML private Label LaberlDomanda;
+    @FXML private Label LabelDomanda;
     @FXML private Label solution;
     @FXML private ImageView ImageView1;
     @FXML private CheckBox value1;
@@ -71,22 +57,23 @@ public class ExerciseClass extends Main implements Initializable{
 
     //crea la lista di pagine da vedere
     private void inizializzaEsercitazioni(Integer i) throws IOException {
-        if (i == 1){
-            //lista delle pagine della prima lezione
-            list_of_pages1 = new LinkedList<Page>();
-            creat_listPages_of_all_Exercise(number_of_pages_of_exercise1, list_of_pages1);
+        switch (i){
+            case 1:
+                //lista delle pagine della prima lezione
+                list_of_pages1 = new LinkedList<Page>();
+                creat_listPages_of_all_Exercise(number_of_pages_of_exercise1, list_of_pages1);
+                break;
+            case 2:
+                //lista delle pagine della seconda lezione
+                list_of_pages2 = new LinkedList<Page>();
+                creat_listPages_of_all_Exercise(number_of_pages_of_exercise2, list_of_pages2);
+                break;
+            case 3:
+                //lista delle pagine della terza lezione
+                list_of_pages3 = new LinkedList<Page>();
+                creat_listPages_of_all_Exercise(number_of_pages_of_exercise3, list_of_pages3);
+                break;
         }
-        else if (i == 2){
-            //lista delle pagine della seconda lezione
-            list_of_pages2 = new LinkedList<Page>();
-            creat_listPages_of_all_Exercise(number_of_pages_of_exercise2, list_of_pages2);
-        }
-        else if (i == 3){
-            //lista delle pagine della terza lezione
-            list_of_pages3 = new LinkedList<Page>();
-            creat_listPages_of_all_Exercise(number_of_pages_of_exercise3, list_of_pages3);
-        }
-
     }
 
     private void creat_listPages_of_all_Exercise(Integer i, LinkedList<Page> tmp) throws IOException {
@@ -97,10 +84,7 @@ public class ExerciseClass extends Main implements Initializable{
         InputStream file_to_open = getClass().getResourceAsStream(x);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
-
         creat_list_exercise_Pages(file_to_read, tmp);
-        //variabile che indica il numero di pagine per esercitazione
-        i = tmp.size();
         setPage(current_exercise, tmp);
     }
 
@@ -158,12 +142,15 @@ public class ExerciseClass extends Main implements Initializable{
         switch (currentExercise){
             case 1:
                 nPage = list.get(current_exercize_page1);
+                break;
             case 2:
                 nPage = list.get(current_exercize_page2);
+                break;
             case 3:
                 nPage = list.get(current_exercize_page3);
+                break;
         }
-        LaberlDomanda.setText(nPage.getText());
+        LabelDomanda.setText(nPage.getText());
         value1.setText(nPage.getValue(0));
         value2.setText(nPage.getValue(1));
         value3.setText(nPage.getValue(2));
@@ -173,9 +160,9 @@ public class ExerciseClass extends Main implements Initializable{
 
 
     private void setPage(){
-        if (current_lesson == 1) setPage(Label1, ImageView1, list_of_pages1, current_exercize_page1);
-        else if (current_lesson == 2) setPage(Label2, ImageView2, list_of_pages2, current_exercize_page2);
-        else if (current_lesson == 3) setPage(Label3, ImageView3,list_of_pages3,current_exercize_page3);
+        if (current_lesson == 1) setPage(Title, ImageView1, list_of_pages1, current_exercize_page1);
+        else if (current_lesson == 2) setPage(Title, ImageView1, list_of_pages2, current_exercize_page2);
+        else if (current_lesson == 3) setPage(Title, ImageView1,list_of_pages3,current_exercize_page3);
     }
 
     private void setPage(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
@@ -186,22 +173,29 @@ public class ExerciseClass extends Main implements Initializable{
         img1.setImage(nPage.getImage());
     }
 
-    private void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
-        if (currentLess == list.size()){
-            //sblocco degli esercizi
-            switch (current_lesson){
-                case 1:
-                    ok_exercise1 = true;
-                case 2:
-                    ok_exercise2 = true;
-                case 3:
-                    ok_exercise3 = true;
-            }
+    private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {
+        if (currentExer == list.size()){
+            setOkLessons();
             showHome();
-        } else if (currentLess < 0) {
+        } else if (currentExer < 0) {
             showHome();
         } else {
             setPage();
+        }
+    }
+
+    //sblocco degli esercizi
+    private void setOkLessons() {
+        switch (current_exercise){
+            case 1:
+                ok_lesson1 = true;
+                break;
+            case 2:
+                ok_lesson2 = true;
+                break;
+            case 3:
+                ok_lesson3 = true;
+                break;
         }
     }
 
@@ -222,25 +216,29 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
+    private void setSolutionNoVisible() {
+        if (is_showSolution) {
+            solution.setVisible(false);
+            is_showSolution = false;
+        }
+    }
+
     public void nextPage(ActionEvent event) throws IOException{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1++;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page1, list_of_pages1);
-                current_prog_exercize1 += prog_exercize1;
-                pb1.setProgress(current_prog_exercize1);
                 break;
             case 2:
                 current_exercize_page2++;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page2, list_of_pages2);
-                current_prog_exercize2 += prog_exercize2;
-                pb2.setProgress(current_prog_exercize2);
                 break;
             case 3:
                 current_exercize_page3++;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page3, list_of_pages3);
-                current_prog_exercize3 += prog_exercize3;
-                pb3.setProgress(current_prog_exercize3);
                 break;
         }
     }
@@ -249,24 +247,23 @@ public class ExerciseClass extends Main implements Initializable{
         switch (current_lesson) {
             case 1:
                 current_exercize_page1--;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page1, list_of_pages1);
-                current_prog_exercize1 -= prog_exercize2;
-                pb1.setProgress(current_prog_exercize1);
                 break;
             case 2:
                 current_exercize_page2--;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page2, list_of_pages2);
-                current_prog_exercize2 -= prog_exercize2;
-                pb1.setProgress(current_prog_exercize2);
                 break;
             case 3:
                 current_exercize_page3--;
+                setSolutionNoVisible();
                 setNew_Page(current_exercize_page3, list_of_pages3);
-                current_prog_exercize3 -= prog_exercize3;
-                pb1.setProgress(current_prog_exercize3);
                 break;
         }
     }
+
+
 
 }
 

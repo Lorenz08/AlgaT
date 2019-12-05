@@ -99,13 +99,13 @@ public class LessonClass extends Main implements Initializable {
     }
 
 
-    public void setPage(){
+    private void setPage(){
         if (current_lesson == 1) xxx(Label1, ImageView1, list_of_pages1, current_page1);
         else if (current_lesson == 2) xxx(Label2, ImageView2, list_of_pages2, current_page2);
         else if (current_lesson == 3) xxx(Label3, ImageView3,list_of_pages3,current_page3);
     }
 
-    public void xxx(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
+    private void xxx(Label l1, ImageView img1, LinkedList<Page> list, double currentl){
         Page nPage = list.get((int) currentl);
         l1.setText(nPage.getText());
         l1.setTextAlignment(TextAlignment.CENTER);
@@ -114,17 +114,20 @@ public class LessonClass extends Main implements Initializable {
     }
 
 
-    public void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
-            if (currentLess == list.size()){
-                //sblocco degli esercizi
-                switch (current_lesson){
-                    case 1:
-                        ok_exercise1 = true;
-                    case 2:
-                        ok_exercise2 = true;
-                    case 3:
-                        ok_exercise3 = true;
-                }
+    private void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
+        if (currentLess == list.size()){
+            //sblocco degli esercizi
+            switch (current_lesson){
+                case 1:
+                    ok_exercise1 = true;
+                    break;
+                case 2:
+                    ok_exercise2 = true;
+                    break;
+                case 3:
+                    ok_exercise3 = true;
+                    break;
+            }
             Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
             Scene simulatorScene = new Scene(simulatorLayout);
             window.setScene(simulatorScene);
