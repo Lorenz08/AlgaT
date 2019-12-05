@@ -4,7 +4,7 @@ CK1: Chiave-valore
 CK2: Chiave-nome
 CK3: Nome-cognome
 CK4: Padre-figlio
-IMG:/Images/unnamed.jpg
+IMG:null
 END
 TXT:Dom2 : La sigla ABR sta per…
 CK1: albero binario di ricerca
@@ -13,28 +13,34 @@ CK3: Albero Bianco di ricerca
 CK4: Albero black red
 IMG:null
 END
-TXT:Dom3 :
-CK1:check1
-CK2:check2
-CK3:check3
-CK4:check4
+TXT:Dom3 : Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio sinistro ramificato in u sono…
+CK1: Minori della chiave di u
+CK2: Minori o uguali della chiave di u
+CK3: Maggiori della chiave di u
+CK4: Uguali della chiave di u
 IMG:null
 END
-TXT:Dom4 :
-CK1:check1
-CK2:check2
-CK3:check3
-CK4:check4
+TXT:Dom4 : Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio destro ramificato in u sono…
+CK1: Maggiori della chiave di u
+CK2: Maggiori o uguali della chiave di u
+CK3: Minori della chiave di u
+CK4: Uguali della chiave di u
 IMG:null
 END
-TXT:Dom5 :
-CK1:check1
-CK2:check2
-CK3:check3
-CK4:check4
-IMG:/Images/unnamed.jpg
+TXT:Dom5 : Quali sono le operazioni di ricerca, inserimento e rimozione negli alberi binari di ricerca?
+CK1: lookNode(), insertNode() e removeNode
+CK2: Find(),insert(),remove()
+CK3: Find(),inserNode(),remove()
+CK4: lookNode(), insert(),remove()
+IMG:null
 END
-
+TXT:Dom6 : Quali tra queste procedure permette di scorrere tuttel le chiavi di un albero binario di ricerca?
+CK1: Min(), Successor()
+CK2: Min(),Predecessor()
+CK3: Max(),successor()
+CK4: Max(),Min()
+IMG:null
+END
 
 
 
