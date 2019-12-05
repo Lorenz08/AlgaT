@@ -47,9 +47,9 @@ public class LessonClass extends Main implements Initializable {
         list_of_pages2 = new LinkedList<Page>();
         list_of_pages3 = new LinkedList<Page>();
         try {
-            creat_listPages_of_all_lessons(list_of_pages1, "Text_file/TxtLesson1" );
-            creat_listPages_of_all_lessons(list_of_pages2, "Text_file/TxtLesson2");
-            creat_listPages_of_all_lessons(list_of_pages3, "Text_file/TxtLesson3");
+            creat_listPages_of_all_lessons(list_of_pages1, "Text_file/Lessons/TxtLesson1" );
+            creat_listPages_of_all_lessons(list_of_pages2, "Text_file/Lessons/TxtLesson2");
+            creat_listPages_of_all_lessons(list_of_pages3, "Text_file/Lessons/TxtLesson3");
         } catch (IOException e) {
             e.printStackTrace();
         }

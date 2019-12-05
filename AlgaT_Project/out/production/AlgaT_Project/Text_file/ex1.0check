@@ -1,0 +1,62 @@
+
+    public void nextPage(ActionEvent event) throws IOException{
+        switch (current_lesson) {
+            case 1:
+                if(checkAnswer1()){//check corretto
+                    goToNewPage(current_exercize_page1,list_of_pages1);
+                    break;
+                }else{
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
+                    break;
+                }
+            case 2:
+                if(checkAnswer2()){
+                    goToNewPage(current_exercize_page2,list_of_pages2);
+                    break;
+                }else{
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
+                    break;
+                }
+            case 3:
+                if(checkAnswer3()){
+                    goToNewPage(current_exercize_page3,list_of_pages3);
+                    break;
+                }else{
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
+                    break;
+                }
+        }
+    }
+
+    private void goToNewPage(Integer page,LinkedList<Page> list) throws IOException {
+        page++;
+        setSolutionNoVisible();
+        setNew_Page(page, list);
+    }
+
+    public void prevPage(ActionEvent event) throws IOException{
+        switch (current_lesson) {
+            case 1:
+                goToPrevPage(current_exercize_page1,list_of_pages1);
+                break;
+            case 2:
+                goToPrevPage(current_exercize_page2,list_of_pages2);
+                break;
+            case 3:
+                goToPrevPage(current_exercize_page3,list_of_pages3);
+                break;
+        }
+    }
+
+    private void goToPrevPage(Integer page,LinkedList<Page> list) throws IOException {
+        page--;
+        setSolutionNoVisible();
+        setNew_Page(page, list);
+    }
+
+}
+
+
+
+
+

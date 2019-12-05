@@ -48,7 +48,7 @@ public class HomeController extends Main {
     }
 
     public void buttonExercise2() throws Exception{
-        if(ok_exercise2 && !ok_lesson2) {
+        if(ok_exercise2 && ok_lesson2) {
             current_exercise = 2;
             Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/TypeTest_1.fxml"));
             Scene exerciselScene = new Scene(exerciseLayout);

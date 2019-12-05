@@ -1,14 +1,12 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,10 +31,6 @@ public class ExerciseClass extends Main implements Initializable{
     private LinkedList<Page> list_of_pages2 = null;
     private LinkedList<Page> list_of_pages3 = null;
 
-//    private Integer number_of_pages_of_exercise1 = 0;
-//    private Integer number_of_pages_of_exercise2 = 0;
-//    private Integer number_of_pages_of_exercise3 = 0;
-
     @FXML private Label Title;
     @FXML private Label LabelDomanda;
     @FXML private Label solution;
@@ -45,10 +39,9 @@ public class ExerciseClass extends Main implements Initializable{
     @FXML private RadioButton value2;
     @FXML private RadioButton value3;
     @FXML private RadioButton value4;
+    @FXML private Label errorMessage;
+    @FXML private TextField textBox;
     @FXML private ToggleGroup group ;
-
-
-
 
 
     /* METHODS */
@@ -230,19 +223,31 @@ public class ExerciseClass extends Main implements Initializable{
     public void nextPage(ActionEvent event) throws IOException{
         switch (current_lesson) {
             case 1:
-                current_exercize_page1++;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page1, list_of_pages1);
+                if(checkAnswer1()){
+                    current_exercize_page1++;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page1, list_of_pages1);
+                    break;
+                }else
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                 break;
             case 2:
-                current_exercize_page2++;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page2, list_of_pages2);
+                if(checkAnswer2()){
+                    current_exercize_page2++;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page2, list_of_pages2);
+                    break;
+                }else
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                 break;
             case 3:
-                current_exercize_page3++;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page3, list_of_pages3);
+                if(checkAnswer2()){
+                    current_exercize_page3++;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page3, list_of_pages3);
+                    break;
+                }else
+                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                 break;
         }
     }
@@ -269,6 +274,18 @@ public class ExerciseClass extends Main implements Initializable{
 
 
 
+    private boolean checkAnswer1() {
+        errorMessage.setText(" ");
+        return(value1.isSelected());
+    }
+    private boolean checkAnswer2() {
+        errorMessage.setText(" ");
+        return(value2.isSelected());
+    }
+    private boolean checkAnswer3() {
+        errorMessage.setText(" ");
+        return(value3.isSelected());
+    }
 }
 
 

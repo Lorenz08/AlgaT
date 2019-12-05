@@ -1,6 +1,59 @@
-﻿FILE DI TESTO PER LA LEZIONE 2
-TXT:matteoeeeeeeeessssssssssswwwwwwe1
-IMG:/Images/unnamed.jpg
+﻿TXT:FILE DI TESTO PER LA LEZIONE 3
+
+TXT:Teorema 1:
+TXT:    	Il sottoalbero con radice u contiene almeno 2^b(u) - 1 nodi interni.
+#
+TXT:    Teorema 2:
+TXT:    	La lunghezza del piu’ lungo cammino semplice radice-foglia non supera il doppio della lunghezza del piu’ corto cammino semplice radice-foglia.
+#
+TXT:    Teorema 3:
+TXT:    	L’altezza di un albero red-balck con n nodi interni e’ al piu’ 2log(n+1).
+IMG:null
+END
+
+TXT:Albero AVL
+#
+TXT:    DEFINIZIONE
+TXT:        Albero Binario di Ricerca bilanciato in altezza
+TXT:    NODO BILANCIATO
+TXT:        altezza sotto-albero sinistro differisce da altezza sotto-albero destro di al più una unità
+TXT:    ALBERO BILANCIATO
+TXT:        tutti i nodi sono bilanciati, un albero è bilanciato in altezza se per ogni suo nodo v, si ha |β(v)|≤1
+TXT:    OPERAZIONI
+TXT:        come in albero binario di ricerca
+TXT:    COMPLESSITA'
+TXT:        O(h(n))
+IMG:null
+END
+
+TXT:L’altezza di un AVL con n entry è O(log n) Determiniamo n(h) - numero minimo di nodi di un AVL di altezza h
+TXT:    Risulta: n(1) = 1 e n(2) = 2
+TXT:    Risulta, per h ≥ 3 :
+IMG:null
+END
+
+TXT:Albero di Fibonacci
+IMG:Images/Fibo.png
+END
+
+TXT:Es
+IMG:null
+END
+
+TXT:Es
+IMG:null
+END
+
+TXT:Es
+IMG:null
+END
+
+TXT:Es
+IMG:null
+END
+
+TXT:End!
+IMG:null
 END
 
 
