@@ -14,7 +14,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="LabelDomanda" layoutX="21.0" layoutY="80.0" prefHeight="77.0" prefWidth="622.0" text="Label1" />
+      <Label fx:id="LabelDomanda" layoutX="27.0" layoutY="78.0" prefHeight="77.0" prefWidth="556.0" text="Label1" />
       <RadioButton fx:id="value1" layoutX="56.0" layoutY="182.0" mnemonicParsing="false" text="value1" />
       <RadioButton fx:id="value2" layoutX="56.0" layoutY="213.0" mnemonicParsing="false" text="value1" />
       <RadioButton fx:id="value3" layoutX="56.0" layoutY="245.0" mnemonicParsing="false" text="value1" />
