@@ -20,8 +20,8 @@ import java.util.ResourceBundle;
 
 public class ExerciseClass extends Main implements Initializable{
 
-    private boolean complete = false;
     private boolean is_showSolution = true;
+    private Integer current_type_exercise =1;
 
     private Integer current_exercize_page1 = 0;
     private Integer current_exercize_page2 = 0;
@@ -48,6 +48,8 @@ public class ExerciseClass extends Main implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            errorMessage.setText(" ");
+
             inizializzaEsercitazioni();
             setSolutionNoVisible();
             setRadioButtonGroup();
@@ -132,16 +134,21 @@ public class ExerciseClass extends Main implements Initializable{
 
     // compila il template con l'esercitazione corretta
     private void setPage(){
-        switch (current_exercise){
-            case 1:
-                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
-                break;
-            case 2:
-                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
-                break;
-            case 3:
-                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
-                break;
+        if(current_type_exercise == 2 ){
+            setSolutionNoVisible();
+
+        }else if (current_type_exercise ==1){
+            switch (current_exercise){
+                case 1:
+                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
+                    break;
+                case 2:
+                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
+                    break;
+                case 3:
+                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
+                    break;
+            }
         }
     }
 
@@ -179,9 +186,19 @@ public class ExerciseClass extends Main implements Initializable{
             showHome();
         } else if (currentExer < 0) {
             showHome();
-        } else {
+        }else if (currentExer == 3){
+            ShowSecondTypeExersise();
+            current_type_exercise = 2;
+        }
+        else {
             setPage();
         }
+    }
+
+    private void ShowSecondTypeExersise() throws IOException{
+        Parent nextLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Tests/TypeTest_2.fxml"));
+        Scene Test2Scene = new Scene(nextLayout);
+        window.setScene(Test2Scene);
     }
 
     //sblocco degli esercizi
@@ -197,9 +214,9 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     private void showHome() throws IOException {
-        Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
-        Scene simulatorScene = new Scene(simulatorLayout);
-        window.setScene(simulatorScene);
+        Parent homeLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
+        Scene homeScene = new Scene(homeLayout);
+        window.setScene(homeScene);
     }
 
     public void showSolution(){
@@ -221,6 +238,8 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     public void nextPage(ActionEvent event) throws IOException{
+        if(current_type_exercise == 2 && current_exercize_page1 == 3 )
+            current_type_exercise = 1;
         switch (current_lesson) {
             case 1:
                 if(checkAnswer1()){
@@ -253,22 +272,27 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     public void prevPage(ActionEvent event) throws IOException{
-        switch (current_lesson) {
-            case 1:
-                current_exercize_page1--;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page1, list_of_pages1);
-                break;
-            case 2:
-                current_exercize_page2--;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page2, list_of_pages2);
-                break;
-            case 3:
-                current_exercize_page3--;
-                setSolutionNoVisible();
-                setNew_Page(current_exercize_page3, list_of_pages3);
-                break;
+        if(current_type_exercise == 1 && current_exercize_page1 == 4 ){
+            current_type_exercise = 2;
+            ShowSecondTypeExersise();
+        }else{
+            switch (current_lesson) {
+                case 1:
+                    current_exercize_page1--;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page1, list_of_pages1);
+                    break;
+                case 2:
+                    current_exercize_page2--;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page2, list_of_pages2);
+                    break;
+                case 3:
+                    current_exercize_page3--;
+                    setSolutionNoVisible();
+                    setNew_Page(current_exercize_page3, list_of_pages3);
+                    break;
+            }
         }
     }
 

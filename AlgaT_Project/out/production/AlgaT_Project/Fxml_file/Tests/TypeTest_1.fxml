@@ -9,12 +9,12 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ExerciseClass">
    <children>
-      <Label fx:id="Title" alignment="CENTER" layoutX="289.0" layoutY="24.0" text="Test 1">
+      <Label fx:id="Title" alignment="CENTER" layoutX="251.0" layoutY="25.0" text="Test 1">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="LabelDomanda" layoutX="21.0" layoutY="80.0" prefHeight="77.0" prefWidth="622.0" text="Label1" />
+      <Label fx:id="LabelDomanda" layoutX="27.0" layoutY="78.0" prefHeight="77.0" prefWidth="556.0" text="Label1" />
       <RadioButton fx:id="value1" layoutX="56.0" layoutY="182.0" mnemonicParsing="false" text="value1" />
       <RadioButton fx:id="value2" layoutX="56.0" layoutY="213.0" mnemonicParsing="false" text="value1" />
       <RadioButton fx:id="value3" layoutX="56.0" layoutY="245.0" mnemonicParsing="false" text="value1" />
