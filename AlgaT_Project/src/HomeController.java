@@ -1,4 +1,3 @@
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,7 +38,7 @@ public class HomeController extends Main {
     public void buttonExercise1() throws Exception {
         if(ok_exercise1){
             current_exercise = 1;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/Esercitazione_1.fxml"));
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/TypeTest_1.fxml"));
             Scene exerciselScene = new Scene(exerciseLayout);
             window.setScene(exerciselScene);
         }
@@ -51,7 +50,7 @@ public class HomeController extends Main {
     public void buttonExercise2() throws Exception{
         if(ok_exercise2 && !ok_lesson2) {
             current_exercise = 2;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/Esercitazione_2.fxml"));
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/TypeTest_1.fxml"));
             Scene exerciselScene = new Scene(exerciseLayout);
             window.setScene(exerciselScene);
         }
@@ -63,7 +62,7 @@ public class HomeController extends Main {
     public void buttonExercise3() throws Exception{
         if (ok_exercise3 && ok_lesson3) {
             current_exercise = 3;
-            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/Esercitazione_3.fxml"));
+            Parent exerciseLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/TypeTest_1.fxml"));
             Scene exerciselScene = new Scene(exerciseLayout);
             window.setScene(exerciselScene);
         }
