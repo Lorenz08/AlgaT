@@ -241,7 +241,7 @@ public class ExerciseClass extends Main implements Initializable{
                     errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                 break;
             case 3:
-                if(checkAnswer2()){
+                if(checkAnswer3()){
                     current_exercize_page3++;
                     setSolutionNoVisible();
                     setNew_Page(current_exercize_page3, list_of_pages3);
