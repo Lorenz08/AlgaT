@@ -26,9 +26,5 @@ public class Page {
         return value[i];
     }
 
-    public String getText() {
-        return(text);
-    }
-
-
+    public String getText() { return(text); }
 }

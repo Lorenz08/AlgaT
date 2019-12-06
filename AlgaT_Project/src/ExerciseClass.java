@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 public class ExerciseClass extends Main implements Initializable{
 
     private boolean is_showSolution = true;
-    private Integer current_type_exercise =1;
+    private Integer current_type_exercise = 1;
 
     private Integer current_exercize_page1 = 0;
     private Integer current_exercize_page2 = 0;
@@ -41,6 +41,7 @@ public class ExerciseClass extends Main implements Initializable{
     @FXML private RadioButton value4;
     @FXML private Label errorMessage;
     @FXML private TextField textBox;
+    @FXML private Label LabelPage;
     @FXML private ToggleGroup group ;
 
 
@@ -49,7 +50,6 @@ public class ExerciseClass extends Main implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         try {
             errorMessage.setText(" ");
-
             inizializzaEsercitazioni();
             setSolutionNoVisible();
             setRadioButtonGroup();
@@ -108,16 +108,20 @@ public class ExerciseClass extends Main implements Initializable{
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
                 //altrimenti crea una nuova instanza di immagine
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
-            }else if(line_of_page_to_add.startsWith("CK1:")){
+            }
+            if(line_of_page_to_add.startsWith("CK1:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK1:", "");
                 answers[0]=line_of_page_to_add;
-            }else if(line_of_page_to_add.startsWith("CK2:")){
+            }
+            if(line_of_page_to_add.startsWith("CK2:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK2:", "");
                 answers[1]=line_of_page_to_add;
-            }else if(line_of_page_to_add.startsWith("CK3:")){
+            }
+            if(line_of_page_to_add.startsWith("CK3:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK3:", "");
                 answers[2]=line_of_page_to_add;
-            }else if(line_of_page_to_add.startsWith("CK4:")){
+            }
+            if(line_of_page_to_add.startsWith("CK4:")){
                 line_of_page_to_add = line_of_page_to_add.replace("CK4:", "");
                 answers[3]=line_of_page_to_add;
             }
@@ -128,16 +132,11 @@ public class ExerciseClass extends Main implements Initializable{
                 complete_page = "";
             }
         }
-        //chiudi il file
         tmp.close();
     }
 
     // compila il template con l'esercitazione corretta
     private void setPage(){
-        if(current_type_exercise == 2 ){
-            setSolutionNoVisible();
-
-        }else if (current_type_exercise ==1){
             switch (current_exercise){
                 case 1:
                     setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
@@ -149,7 +148,6 @@ public class ExerciseClass extends Main implements Initializable{
                     setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
                     break;
             }
-        }
     }
 
     private void setPage(Label LabelDom, ImageView img1, RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4 ,LinkedList<Page> list, double currentl){
@@ -158,16 +156,32 @@ public class ExerciseClass extends Main implements Initializable{
         LabelDom.setText(nPage.getText());
         LabelDom.setTextAlignment(TextAlignment.CENTER);
         LabelDom.setWrapText(true);
+        setRadio(value1, value2, value3, value4, nPage);
+        img1.setImage(nPage.getImage());
+        setPageNumber();
+    }
+
+    private void setRadio(RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4, Page nPage) {
         SetValueRadioButton(value1, nPage, 0);
         SetValueRadioButton(value2, nPage, 1);
         SetValueRadioButton(value3, nPage, 2);
         SetValueRadioButton(value4, nPage, 3);
-        img1.setImage(nPage.getImage());
     }
 
-    private void SetValueRadioButton(RadioButton value, Page nPage, int i) {
-        value.setText(nPage.getValue(i));
+    private void setPageNumber(){
+        switch (current_exercise){
+            case 1:
+                LabelPage.setText(Integer.toString(current_exercize_page1 ));
+                break;
+            case 2:
+                LabelPage.setText(Integer.toString(current_exercize_page2));
+                break;
+            case 3:
+                LabelPage.setText(Integer.toString(current_exercize_page3));
+        }
     }
+
+    private void SetValueRadioButton(RadioButton value, Page nPage, int i) { value.setText(nPage.getValue(i)); }
 
     private void setTitle(){
         switch (current_exercise){
@@ -183,19 +197,30 @@ public class ExerciseClass extends Main implements Initializable{
     private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {
         if (currentExer == list.size()){
             setOkLessons();
+            resetExercise();
+            current_type_exercise=2;
+            showSecondTypeExersise();
+        }else if (currentExer < 0)
             showHome();
-        } else if (currentExer < 0) {
-            showHome();
-        }else if (currentExer == 3){
-            ShowSecondTypeExersise();
-            current_type_exercise = 2;
-        }
-        else {
+        else
             setPage();
+    }
+
+    private void resetExercise(){
+        switch (current_exercise){
+            case 1:
+                current_exercize_page1 = 0;
+                break;
+            case 2:
+                current_exercize_page2=0;
+                break;
+            case 3:
+                current_exercize_page3=0;
+                break;
         }
     }
 
-    private void ShowSecondTypeExersise() throws IOException{
+    private void showSecondTypeExersise() throws IOException{
         Parent nextLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/Tests/TypeTest_2.fxml"));
         Scene Test2Scene = new Scene(nextLayout);
         window.setScene(Test2Scene);
@@ -220,13 +245,31 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     public void showSolution(){
-        if(is_showSolution){
-            solution.setVisible(false);
-            is_showSolution =false;
+        switch (current_type_exercise){
+            case 1:
+                if(is_showSolution){
+                    solution.setVisible(false);
+                    is_showSolution =false;
+                }
+                else{
+                    setSolutionPosition();
+                    solution.setVisible(true);
+                    is_showSolution=true;
+                }break;
+            case 2:
+                solution.setText("insertNode");
         }
-        else{
-            solution.setVisible(true);
-            is_showSolution=true;
+
+    }
+
+    private void setSolutionPosition(){
+        switch (current_exercise){
+            case 2:
+                solution.setLayoutY(212);
+                break;
+            case 3:
+                solution.setLayoutY(242);
+                break;
         }
     }
 
@@ -237,66 +280,76 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
+
     public void nextPage(ActionEvent event) throws IOException{
-        if(current_type_exercise == 2 && current_exercize_page1 == 3 )
-            current_type_exercise = 1;
-        switch (current_lesson) {
-            case 1:
-                if(checkAnswer1()){
-                    current_exercize_page1++;
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page1, list_of_pages1);
+        if(current_type_exercise == 2){
+            if(checkAnswerType2())
+                showHome();
+            else
+                errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
+        }else{
+            switch (current_lesson) {
+                case 1:
+                    if(checkAnswer1()){
+                        current_exercize_page1++;
+                        setSolutionNoVisible();
+                        setNew_Page(current_exercize_page1, list_of_pages1);
+                        break;
+                    }else
+                        errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                     break;
-                }else
-                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
-                break;
-            case 2:
-                if(checkAnswer2()){
-                    current_exercize_page2++;
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page2, list_of_pages2);
+                case 2:
+                    if(checkAnswer2()){
+                        current_exercize_page2++;
+                        setSolutionNoVisible();
+                        setNew_Page(current_exercize_page2, list_of_pages2);
+                        break;
+                    }else
+                        errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                     break;
-                }else
-                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
-                break;
-            case 3:
-                if(checkAnswer3()){
-                    current_exercize_page3++;
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page3, list_of_pages3);
+                case 3:
+                    if(checkAnswer3()){
+                        current_exercize_page3++;
+                        setSolutionNoVisible();
+                        setNew_Page(current_exercize_page3, list_of_pages3);
+                        break;
+                    }else
+                        errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
                     break;
-                }else
-                    errorMessage.setText("Sbagliato! Riprova o vedi la soluzione");
-                break;
+            }
+            //deselectRadioButton();
         }
     }
 
     public void prevPage(ActionEvent event) throws IOException{
-        if(current_type_exercise == 1 && current_exercize_page1 == 4 ){
-            current_type_exercise = 2;
-            ShowSecondTypeExersise();
-        }else{
             switch (current_lesson) {
                 case 1:
                     current_exercize_page1--;
+                    deselectRadioButton();
                     setSolutionNoVisible();
                     setNew_Page(current_exercize_page1, list_of_pages1);
                     break;
                 case 2:
                     current_exercize_page2--;
+                    deselectRadioButton();
                     setSolutionNoVisible();
                     setNew_Page(current_exercize_page2, list_of_pages2);
                     break;
                 case 3:
                     current_exercize_page3--;
+                    deselectRadioButton();
                     setSolutionNoVisible();
                     setNew_Page(current_exercize_page3, list_of_pages3);
                     break;
             }
-        }
     }
 
-
+    private void deselectRadioButton(){
+        value1.setSelected(false);
+        value2.setSelected(false);
+        value3.setSelected(false);
+        value4.setSelected(false);
+    }
 
     private boolean checkAnswer1() {
         errorMessage.setText(" ");
@@ -309,6 +362,10 @@ public class ExerciseClass extends Main implements Initializable{
     private boolean checkAnswer3() {
         errorMessage.setText(" ");
         return(value3.isSelected());
+    }
+    private boolean checkAnswerType2(){
+        errorMessage.setText(" ");
+        return(textBox.getCharacters().toString().equalsIgnoreCase("insertNode")); //TODO normalize and check strings
     }
 }
 

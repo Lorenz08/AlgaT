@@ -1,22 +1,20 @@
 ﻿TXT:FILE DI TESTO PER LA LEZIONE 1
-TXT:Gli alberi sono una delle strutture di dati piu’ efficienti per realizzare dizionari. In modo particolare quando si vuole mantenere la possibilita’ di scorrere le chiavi presenti nella struttura secondo un qualche ordinamento.
-TXT:    Per fare cio’, i nodi devono essere dotati di informazioni di chiave e di valore , la struttura dell’albero deve permettere di effettuare le ricerche.
-TXT:    Quindi vedremo le caratteristiche minime necessarie per la ricerca e studieremo come rendere efficienti le ricerche, inserzioni e cancellazioni.
+TXT:Gli alberi sono una delle strutture di dati piu’ efficienti per realizzare dizionari. In modo particolare quando si vuole mantenere la possibilita’ di scorrere le chiavi presenti nella struttura secondo un qualche ordinamento.#
+TXT:Per fare cio’, i nodi devono essere dotati di informazioni di chiave e di valore , la struttura dell’albero deve permettere di effettuare le ricerche.#
+TXT:Quindi vedremo le caratteristiche minime necessarie per la ricerca e studieremo come rendere efficienti le ricerche, inserzioni e cancellazioni.#
 IMG:null
 END
 
-TXT:Le associazioni chiave-valore di un dizionario D possono essere contenute nei nodi di un albero binario B, ABR o albero binario di ricerca, che verifica le seguenti proprieta’:
-#
-TXT:    a)	Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio sinistro ramificato in u sono minori della chiave di u.
-#
-TXT:    b)	Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio destro ramificato in u sono maggiori della chiave di u.
-TXT:    Hanno lo scopo di agevolare la ricerca la quale e’ molto simile alla ricerca degli alberi binari:
-TXT:    -	Confrontare l’elemento cercato con la chiave di u
-TXT:    -	Se diversi, riapplicare il procedimento al figlio sinistro o destro in base al risultato
+TXT:Le associazioni chiave-valore di un dizionario D possono essere contenute nei nodi di un albero binario B, ABR o albero binario di ricerca, che verifica le seguenti proprieta’:#
+TXT:    a)	Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio sinistro ramificato in u sono minori della chiave di u.#
+TXT:    b)	Per ogni nodo u, tutte le chiavi contenute nel sottoalbero del figlio destro ramificato in u sono maggiori della chiave di u.#
+TXT:Hanno lo scopo di agevolare la ricerca la quale e’ molto simile alla ricerca degli alberi binari:#
+TXT:    -	Confrontare l’elemento cercato con la chiave di u#
+TXT:    -	Se diversi, riapplicare il procedimento al figlio sinistro o destro in base al risultato#
 IMG:null
 END
 
-TXT:Assumiamo che l’albero binario di ricerca sia realizzato con puntatori, le operazioni lookNode(), insertNode() e removeNode(), cercano, inseriscono e rimuovono i nodi all’interno di questi particolari alberi.
+TXT:Assumiamo che l’albero binario di ricerca sia realizzato con puntatori, le operazioni# lookNode(), insertNode() e removeNode(),# cercano, inseriscono e rimuovono i nodi all’interno di questi particolari alberi.
 IMG:null
 END
 
@@ -28,31 +26,31 @@ TXT:Per inserire associazioni chiave-elemento, insertNode() effettua inanzitutto
 IMG:null
 END
 
-TXT:La procedura link() gestisce le due azioni necessarie per collegare un nodo padre p ad un nodo figlio u :
-TXT:    -	Modificare il puntatore al padre di u
-TXT:    -	Inserire u come figlio sinistro o destro di p, a seconda del valore di x che viene confrontato con il contenuto in p.
-TXT:    Casi particolari:
-TXT:    -	P puo essere nil, cioe’ u e la nuova radice
-TXT:    -	U puo essere nil, significa che un nodo e’ stato cancellato e nil sostituisce il figlio corrispondente nel padre
-TXT:    Link() ha costo 0(1).
+TXT:La procedura link() gestisce le due azioni necessarie per collegare un nodo padre p ad un nodo figlio u :#
+TXT:    -	Modificare il puntatore al padre di u#
+TXT:    -	Inserire u come figlio sinistro o destro di p, a seconda del valore di x che viene confrontato con il contenuto in p.#
+TXT:Casi particolari:#
+TXT:    -	P puo essere nil, cioe’ u e la nuova radice#
+TXT:    -	U puo essere nil, significa che un nodo e’ stato cancellato e nil sostituisce il figlio corrispondente nel padre#
+TXT:Link() ha costo 0(1).#
 IMG:null
 END
 
-TXT:Per realizzare la removeNode() si procede in modo analogo all’inserzione, con una complicazione in piu’ data dal fatto che l’elemento x da cancellare si trova in un nodo u che puo’ essere una foglia o no.
-TXT:    1)	Se u non ha figli, u e una foglia e si procede alla sua cancellazione.
-TXT:    2)	Se u ha un solo figlio, u e rimosso rendendo il figlio di u , figlio del padre di u.
-TXT:    3)	Se u ha due figli, ci si puo ridurre al caso 1 e 2 , sostituendo l’elemento da cancellare x con il piu’ piccolo elemento y tale che y>x, che si trova nel nodo s raggiungibile scendendo sempre a sinistra nel sottoalbero radicato nel figlio destro di u. L’elemento y prende il posto di x nel nodo u mentre viene rimosso il nodo s che , per definizione, non puo’ avere un figlio sinistro.
-TXT:    La procedura restituisce il puntatore all’albero e ha costo 0(h).
+TXT:Per realizzare la removeNode() si procede in modo analogo all’inserzione, con una complicazione in piu’ data dal fatto che l’elemento x da cancellare si trova in un nodo u che puo’ essere una foglia o no.#
+TXT:    1)	Se u non ha figli, u e una foglia e si procede alla sua cancellazione.#
+TXT:    2)	Se u ha un solo figlio, u e rimosso rendendo il figlio di u , figlio del padre di u.#
+TXT:    3)	Se u ha due figli, ci si puo ridurre al caso 1 e 2 , sostituendo l’elemento da cancellare x con il piu’ piccolo elemento y tale che y>x, che si trova nel nodo s# raggiungibile scendendo sempre a sinistra nel sottoalbero radicato nel figlio destro di u. L’elemento y prende il posto di x nel nodo u mentre viene rimosso il nodo s che , per definizione, non puo’ avere un figlio sinistro.
+TXT:La procedura restituisce il puntatore all’albero e ha costo 0(h).#
 IMG:null
 END
 
-TXT:Gli alberi di ricerca, a confronto con le tabelle hash, mantengono l’ordinamentro tra i valori.
-TXT:    Un’operatore min() restituisce il minimo valore contenuto in un nodo dell’albero, basta infatti scendere sempre a sinistra fino ad arrivare alla foglia.
-TXT:    Un’operatore max() analogamente, restituisce il massimo valore contenuto in un nodo dell’albero, scendendo sempre a destra fino ad arrivare alla foglia.
-TXT:    Oltre a questi due metodi so possono avere anche il successore e il predecessore di un nodo t.
-TXT:    -	Se t ha un figlio destro, il successore e’ il minimo u del sottoalbero destro.
-TXT:    -	Altrimenti, il successore e’ il primo antenato u di t per cui t sta nel sottoalbero sinistro di u
-TXT:    Con l’operatore min() e la procedura successor() e possibile scorrere tutte le chiavi dell’albero con complessita’ 0(n) tutti i nodi vengono visitati al massimo due volte.
+TXT:Gli alberi di ricerca, a confronto con le tabelle hash, mantengono l’ordinamentro tra i valori.#
+TXT:Un’operatore min() restituisce il minimo valore contenuto in un nodo dell’albero, basta infatti scendere sempre a sinistra fino ad arrivare alla foglia.#
+TXT:Un’operatore max() analogamente, restituisce il massimo valore contenuto in un nodo dell’albero, scendendo sempre a destra fino ad arrivare alla foglia.#
+TXT:Oltre a questi due metodi so possono avere anche il successore e il predecessore di un nodo t.#
+TXT:    -	Se t ha un figlio destro, il successore e’ il minimo u del sottoalbero destro.#
+TXT:    -	Altrimenti, il successore e’ il primo antenato u di t per cui t sta nel sottoalbero sinistro di u#
+TXT:Con l’operatore min() e la procedura successor() e possibile scorrere tutte le chiavi dell’albero con complessita’ 0(n) tutti i nodi vengono visitati al massimo due volte.
 IMG:null
 END
 
