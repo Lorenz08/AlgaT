@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeController">
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HomeController">
     <children>
-        <Button layoutX="28.0" layoutY="411.0" mnemonicParsing="false" onAction="#simulatorButton" prefHeight="53.0" prefWidth="177.0" text="Simulator" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
+        <Button layoutX="28.0" layoutY="411.0" mnemonicParsing="false" onAction="#simulatorButton" prefHeight="50.0" prefWidth="100.0" text="SIMULATOR" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="28.0" />
         <Label layoutX="175.0" layoutY="50.0" text="Tutorial su gli alberi bilanciati">
             <font>
                 <Font size="24.0" />
