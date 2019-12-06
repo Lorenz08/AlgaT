@@ -1,3 +1,3 @@
-public class SimulatorClass extends Main{
+public class SimulatorClass extends Main {
 
 }

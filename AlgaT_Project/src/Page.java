@@ -12,7 +12,6 @@ public class Page {
     }
 
     Page(String txt, Image img ,String[] risposte) {
-        //super();
         image = img;
         text = txt;
         value = risposte;

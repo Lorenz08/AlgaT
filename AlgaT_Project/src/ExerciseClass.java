@@ -106,7 +106,7 @@ public class ExerciseClass extends Main implements Initializable{
                 line_of_page_to_add = line_of_page_to_add.replace("IMG:", "");
                 //rimuovo IMG: e se non ce nessuna immagine non caricare nulla
                 if (line_of_page_to_add.contains("null")) image_to_load = null;
-                //altrimenti crea una nuova instanza di immagine
+                    //altrimenti crea una nuova instanza di immagine
                 else image_to_load = new Image(getClass().getResourceAsStream(line_of_page_to_add));
             }
             if(line_of_page_to_add.startsWith("CK1:")){
@@ -137,17 +137,17 @@ public class ExerciseClass extends Main implements Initializable{
 
     // compila il template con l'esercitazione corretta
     private void setPage(){
-            switch (current_exercise){
-                case 1:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
-                    break;
-                case 2:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
-                    break;
-                case 3:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
-                    break;
-            }
+        switch (current_exercise){
+            case 1:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
+                break;
+            case 2:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
+                break;
+            case 3:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
+                break;
+        }
     }
 
     private void setPage(Label LabelDom, ImageView img1, RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4 ,LinkedList<Page> list, double currentl){
@@ -322,26 +322,26 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     public void prevPage(ActionEvent event) throws IOException{
-            switch (current_lesson) {
-                case 1:
-                    current_exercize_page1--;
-                    deselectRadioButton();
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page1, list_of_pages1);
-                    break;
-                case 2:
-                    current_exercize_page2--;
-                    deselectRadioButton();
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page2, list_of_pages2);
-                    break;
-                case 3:
-                    current_exercize_page3--;
-                    deselectRadioButton();
-                    setSolutionNoVisible();
-                    setNew_Page(current_exercize_page3, list_of_pages3);
-                    break;
-            }
+        switch (current_lesson) {
+            case 1:
+                current_exercize_page1--;
+                deselectRadioButton();
+                setSolutionNoVisible();
+                setNew_Page(current_exercize_page1, list_of_pages1);
+                break;
+            case 2:
+                current_exercize_page2--;
+                deselectRadioButton();
+                setSolutionNoVisible();
+                setNew_Page(current_exercize_page2, list_of_pages2);
+                break;
+            case 3:
+                current_exercize_page3--;
+                deselectRadioButton();
+                setSolutionNoVisible();
+                setNew_Page(current_exercize_page3, list_of_pages3);
+                break;
+        }
     }
 
     private void deselectRadioButton(){

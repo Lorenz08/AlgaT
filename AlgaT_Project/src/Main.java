@@ -1,37 +1,54 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sun.plugin.util.UIUtil;
 
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import java.net.URL;
+import java.util.LinkedList;
+import java.util.ResourceBundle;
 
 
 public class Main extends Application  {
 
-    protected static Stage window;
-    protected static Stage error_window;
-    protected static Stage simulator_window = new Stage();
-    protected static boolean simulatorIsActive = false;
+    public static Stage window;
+    public static Stage error_window;
+    public static Stage simulator_window = new Stage();
+    public static boolean simulatorIsActive = false;
 
-    protected static Integer current_lesson = 0;
-    protected static Integer current_exercise = 0;
+    public static Integer current_lesson = 0;
+    public static Integer current_exercise = 0;
 
-    protected static boolean ok_lesson2 = false;
-    protected static boolean ok_lesson3 = false;
+    public static boolean ok_lesson1 = false;
+    public static boolean ok_lesson2 = false;
+    public static boolean ok_lesson3 = false;
 
-    protected static boolean ok_exercise1 = false;
-    protected static boolean ok_exercise2 = false;
-    protected static boolean ok_exercise3 = false;
+    public static boolean ok_exercise1 = false;
+    public static boolean ok_exercise2 = false;
+    public static boolean ok_exercise3 = false;
+
+
 
 
     public static void main(String[] args) {
@@ -47,8 +64,6 @@ public class Main extends Application  {
     public void start(Stage stage) throws Exception{
         window = stage;
         window.setTitle("AlgaT");
-        window.setX(30);
-        window.setY(150);
         window.setWidth(600);
         window.setHeight(600);
         window.setResizable(false);
@@ -82,12 +97,14 @@ public class Main extends Application  {
         }
     }
 
+
     public void homeButton() throws Exception{
         window.setTitle("AlgaT");
         Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
         Scene simulatorScene = new Scene(simulatorLayout);
         window.setScene(simulatorScene);
     }
+
 
     public void setError_window(Integer i) throws IOException {
         error_window = new Stage();
@@ -115,6 +132,7 @@ public class Main extends Application  {
         error_window.show();
     }
 
+
     private void setMessageError(Integer i, Label label) throws IOException {
         InputStream file_to_open = getClass().getResourceAsStream("Text_file/ErrorMessage");  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
@@ -125,9 +143,12 @@ public class Main extends Application  {
             if (line_to_add.startsWith(i.toString() + ":")) {
                 line_to_add = line_to_add.replace(i.toString() + ":", "");
                 complete_page = complete_page.concat(line_to_add);
+                }
             }
-        }
         label.setText(complete_page);
     }
+
+
+
 }
 

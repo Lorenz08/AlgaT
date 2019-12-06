@@ -45,6 +45,9 @@ public class LessonClass extends Main implements Initializable {
 
 
 
+
+
+
     public void initialize(URL location, ResourceBundle resources) {
         list_of_pages1 = new LinkedList<Page>();
         list_of_pages2 = new LinkedList<Page>();
@@ -125,15 +128,15 @@ public class LessonClass extends Main implements Initializable {
 
 
     public void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
-        if (currentLess == list.size()){
-            switch (current_lesson){
-                case 1:
-                    ok_exercise1 = true;
-                case 2:
-                    ok_exercise2 = true;
-                case 3:
-                    ok_exercise3 = true;
-            }
+            if (currentLess == list.size()){
+                switch (current_lesson){
+                    case 1:
+                        ok_exercise1 = true;
+                    case 2:
+                        ok_exercise2 = true;
+                    case 3:
+                        ok_exercise3 = true;
+                }
             Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
             Scene simulatorScene = new Scene(simulatorLayout);
             window.setScene(simulatorScene);
@@ -176,7 +179,6 @@ public class LessonClass extends Main implements Initializable {
             setNew_Page(current_page1, list_of_pages1);
             current_prog_lesson1 -= prog_lesson1;
             pb1.setProgress(current_prog_lesson1);
-            System.out.println(current_page1);
         }
         else if (current_lesson == 2) {
             current_page2--;
