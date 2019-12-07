@@ -33,6 +33,6 @@
       </Label>
       <Label fx:id="errorMessage" layoutX="56.0" layoutY="345.0" prefHeight="17.0" prefWidth="243.0" textFill="RED" />
       <Label fx:id="LabelPage" layoutX="517.0" layoutY="522.0" prefHeight="44.0" prefWidth="48.0" />
-      <Label layoutX="439.0" layoutY="522.0" prefHeight="44.0" prefWidth="78.0" text="Pagina :" />
+      <Label layoutX="439.0" layoutY="522.0" prefHeight="44.0" prefWidth="78.0" text="Pagina : " />
    </children>
 </AnchorPane>
