@@ -66,15 +66,12 @@ public class LessonClass extends Main implements Initializable {
         current_prog_lesson3 = prog_lesson3;
     }
 
-
-
     private void creat_listPages_of_all_lessons(LinkedList<Page> listOfPage, String String) throws IOException {
         InputStream file_to_open = getClass().getResourceAsStream(String);  //seleziona il file txt da aprire
         InputStreamReader file_decode = new InputStreamReader(file_to_open);    //trasforma il contenuto del file che apre da bit TxtLesson2 caratteri ASCII
         BufferedReader file_to_read = new BufferedReader(file_decode);    //legge e bufferizza i caratteri letti da uno stream di caratteri in input
         creat_listPages(file_to_read, listOfPage);
     }
-
 
     private void creat_listPages(BufferedReader tmp, LinkedList<Page> list) throws IOException {
         String complete_page = "";
@@ -109,7 +106,6 @@ public class LessonClass extends Main implements Initializable {
         tmp.close();
     }
 
-
     public void setPage(){
         if (current_lesson == 1) xxx(Label1, ImageView1, list_of_pages1, current_page1);
         else if (current_lesson == 2) xxx(Label2, ImageView2, list_of_pages2, current_page2);
@@ -123,16 +119,18 @@ public class LessonClass extends Main implements Initializable {
         img1.setImage(nPage.getImage());
     }
 
-
     public void setNew_Page(double currentLess, LinkedList<Page> list) throws IOException {
         if (currentLess == list.size()){
             switch (current_lesson){
                 case 1:
                     ok_exercise1 = true;
+                    break;
                 case 2:
                     ok_exercise2 = true;
+                    break;
                 case 3:
                     ok_exercise3 = true;
+                    break;
             }
             Parent simulatorLayout = FXMLLoader.load(getClass().getResource("/Fxml_file/InitialScene.fxml"));
             Scene simulatorScene = new Scene(simulatorLayout);
@@ -145,7 +143,6 @@ public class LessonClass extends Main implements Initializable {
             setPage();
         }
     }
-
 
     public void nextPage() throws IOException {
         if (current_lesson == 1) {
@@ -168,7 +165,6 @@ public class LessonClass extends Main implements Initializable {
             pb3.setProgress(current_prog_lesson3);
         }
     }
-
 
     public void prevPage() throws IOException {
         if (current_lesson == 1) {
@@ -215,7 +211,4 @@ public class LessonClass extends Main implements Initializable {
             event.consume();
         });
     }
-
-
-
 }
