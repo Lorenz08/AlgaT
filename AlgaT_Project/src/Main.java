@@ -24,7 +24,7 @@ public class Main extends Application  {
     protected static boolean simulatorIsActive = false;
 
     protected static Integer current_lesson = 0;
-    protected static Integer current_exercise = 0;
+    protected static Integer current_exercize = 0;
 
     protected static boolean ok_lesson2 = false;
     protected static boolean ok_lesson3 = false;
