@@ -33,6 +33,7 @@ public class ExerciseClass extends Main implements Initializable{
     @FXML private Label Title;
     @FXML private Label LabelDomanda;
     @FXML private Label solution;
+    @FXML private Label solutionType2;
     @FXML private ImageView ImageView1;
     @FXML private RadioButton value1;
     @FXML private RadioButton value2;
@@ -43,18 +44,18 @@ public class ExerciseClass extends Main implements Initializable{
     @FXML private Label LabelPage;
     @FXML private ToggleGroup group ;
 
-    private Integer current_type_exercise = 1;
 
     /* METHODS */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             setErrorLabel(errorMessage, " ");
-            if(current_type_exercise == 1){
+            if(switchTypeExersise.getCurrent_type_exercise() == 1 || switchTypeExersise.getGoToExType_1()){
                 inizializzaEsercitazioni();
                 setSolutionNoVisible();
                 setRadioButtonGroup();
-            }
+            }//else
+                //setPageNumber();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -76,7 +77,12 @@ public class ExerciseClass extends Main implements Initializable{
         creat_listPages_of_all_Exercise(list_of_pages1, "Text_file/Tests/TxtExercise1");
         creat_listPages_of_all_Exercise(list_of_pages2, "Text_file/Tests/TxtExercise2");
         creat_listPages_of_all_Exercise(list_of_pages3, "Text_file/Tests/TxtExercise3");
-        setPage();
+        if (switchTypeExersise.getGoToExType_1()){
+            switchTypeExersise.setGoToExType_1(false);
+            current_exercize_page1 = 5;
+            setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
+        }else
+            setPage();
     }
 
     private void creat_listPages_of_all_Exercise(LinkedList<Page> listOfPage, String String) throws IOException {
@@ -140,31 +146,7 @@ public class ExerciseClass extends Main implements Initializable{
         tmp.close();
     }
 
-    // compila il template con l'esercitazione corretta
-    private void setPage(){
-            switch (current_exercise){
-                case 1:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
-                    break;
-                case 2:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
-                    break;
-                case 3:
-                    setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
-                    break;
-            }
-    }
 
-    private void setPage(Label LabelDom, ImageView img1, RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4 ,LinkedList<Page> list, double currentl){
-        Page nPage = list.get((int) currentl);
-        setTitle();
-        setErrorLabel(LabelDom, nPage.getText());
-        LabelDom.setTextAlignment(TextAlignment.CENTER);
-        LabelDom.setWrapText(true);
-        setRadio(value1, value2, value3, value4, nPage);
-        img1.setImage(nPage.getImage());
-        setPageNumber();
-    }
 
     private void setRadio(RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4, Page nPage) {
         SetValueRadioButton(value1, nPage, 0);
@@ -174,7 +156,9 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     private void setPageNumber(){
-        switch (current_exercise){
+        if(current_exercize == 1 && switchTypeExersise.getCurrent_type_exercise() == 2)
+            LabelPage.setText("6");
+        switch  (current_exercize){
             case 1:
                 setErrorLabel(LabelPage, Integer.toString(current_exercize_page1 ));
                 break;
@@ -189,43 +173,12 @@ public class ExerciseClass extends Main implements Initializable{
     private void SetValueRadioButton(RadioButton value, Page nPage, int i) { value.setText(nPage.getValue(i)); }
 
     private void setTitle(){
-        switch (current_exercise){
+        switch  (current_exercize){
             case 2:
                 setErrorLabel(Title, "Test 2");
                 break;
             case 3:
                 setErrorLabel(Title, "Test 3");
-                break;
-        }
-    }
-
-    private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {
-        if (currentExer == list.size() && current_exercise==1){
-            current_type_exercise = 2;
-            showSecondTypeExersise();
-//            setOkLessons();
-//            resetExercise();
-//            showHome();
-        }else if(currentExer == list.size()){
-            setOkLessons();
-//          resetExercise();
-            showHome();
-        } else if (currentExer < 0)
-            showHome();
-        else
-            setPage();
-    }
-
-    private void resetExercise(){
-        switch (current_exercise){
-            case 1:
-                current_exercize_page1 = 0;
-                break;
-            case 2:
-                current_exercize_page2=0;
-                break;
-            case 3:
-                current_exercize_page3=0;
                 break;
         }
     }
@@ -237,9 +190,16 @@ public class ExerciseClass extends Main implements Initializable{
         window.show();
     }
 
+    private void showFirstTypeExersise() throws IOException{
+        Parent nextLayout = FXMLLoader.load(getClass().getResource("Fxml_file/Tests/TypeTest_1.fxml"));
+        Scene toSetUp = new Scene(nextLayout);
+        window.setScene(toSetUp);
+        window.show();
+    }
+
     //sblocco degli esercizi
     private void setOkLessons() {
-        switch (current_exercise){
+        switch  (current_exercize){
             case 1:
                 ok_lesson2 = true;
                 break;
@@ -256,25 +216,47 @@ public class ExerciseClass extends Main implements Initializable{
     }
 
     public void showSolution(){
-        switch (current_type_exercise){
+        switch (switchTypeExersise.getCurrent_type_exercise()){
             case 1:
-                if(is_showSolution){
-                    solution.setVisible(false);
-                    is_showSolution =false;
-                }
-                else{
-                    setSolutionPosition();
-                    solution.setVisible(true);
-                    is_showSolution=true;
-                }break;
+                checkVisibleType_1();
+                break;
             case 2:
-                setErrorLabel(solution, "insertNode");
+                checkSolutionType_2();
+                break;
         }
+    }
 
+    private void checkVisibleType_1() {
+        if(is_showSolution){
+            solution.setVisible(false);
+            is_showSolution =false;
+        }
+        else{
+            setSolutionPosition();
+            solution.setVisible(true);
+            is_showSolution=true;
+        }
+    }
+
+    private void checkSolutionType_2() {
+        if(is_showSolution){
+            setSolutionLabel(solutionType2, "");
+            solutionType2.setVisible(false);
+            is_showSolution =false;
+        }
+        else{
+            setSolutionLabel(solutionType2, "insertNode");
+            solutionType2.setVisible(true);
+            is_showSolution=true;
+        }
+    }
+
+    private void setSolutionLabel(Label solutionType2,String s ){
+        solutionType2.setText(s);
     }
 
     private void setSolutionPosition(){
-        switch (current_exercise){
+        switch  (current_exercize){
             case 2:
                 solution.setLayoutY(212);
                 break;
@@ -291,18 +273,56 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
+    private void setPage(){
+        switch  (current_exercize){
+            case 1:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages1, current_exercize_page1);
+                break;
+            case 2:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4, list_of_pages2, current_exercize_page2);
+                break;
+            case 3:
+                setPage(LabelDomanda, ImageView1, value1, value2, value3, value4,list_of_pages3, current_exercize_page3);
+                break;
+        }
+    }
+
+    // compila il template_1 con l'esercitazione corretta
+    private void setPage(Label LabelDom, ImageView img1, RadioButton value1, RadioButton value2, RadioButton value3, RadioButton value4 ,LinkedList<Page> list, double currentl){
+        Page nPage = list.get((int) currentl);
+        setTitle();
+        setErrorLabel(LabelDom, nPage.getText());
+        LabelDom.setTextAlignment(TextAlignment.CENTER);
+        LabelDom.setWrapText(true);
+        setRadio(value1, value2, value3, value4, nPage);
+        img1.setImage(nPage.getImage());
+        setPageNumber();
+    }
+
+    private void setNew_Page(double currentExer, LinkedList<Page> list) throws IOException {
+        if (currentExer == list.size() && switchTypeExersise.getCurrent_type_exercise() == 1 && current_exercize == 1){
+            switchTypeExersise.setCurrent_type_exercise(2);
+            showSecondTypeExersise();
+            setPageNumber();
+        }else if(currentExer == list.size()){
+            setOkLessons();
+            showHome();
+        }else if (currentExer < 0)
+            showHome();
+        else
+            setPage();
+    }
 
     public void nextPage(ActionEvent event) throws IOException{
-        if(current_type_exercise == 2){
+        if(switchTypeExersise.getCurrent_type_exercise() == 2){
             if(checkAnswerType2()){
                 setOkLessons();
-                current_type_exercise = 1;
-                resetExercise();
+                switchTypeExersise.setCurrent_type_exercise(1);
                 showHome();
             }else
                 setErrorLabel(errorMessage, "Sbagliato! Riprova o vedi la soluzione");
         }else{
-            switch (current_exercise) {
+            switch  (current_exercize) {
                 case 1:
                     if(checkAnswer1()){
                         current_exercize_page1++;
@@ -334,13 +354,13 @@ public class ExerciseClass extends Main implements Initializable{
         }
     }
 
-    private void setErrorLabel(Label errorMessage, String s) {
-        errorMessage.setText(s);
-    }
 
     public void prevPage(ActionEvent event) throws IOException{
-        if(current_type_exercise == 2)
-            setNew_Page(current_exercize_page1, list_of_pages1);
+        if( switchTypeExersise.getCurrent_type_exercise() == 2 && current_exercize == 1){
+            switchTypeExersise.setCurrent_type_exercise(1);
+            switchTypeExersise.setGoToExType_1(true);
+            showFirstTypeExersise();
+        }
         else{
             switch (current_lesson) {
                 case 1:
@@ -367,7 +387,7 @@ public class ExerciseClass extends Main implements Initializable{
         value3.setSelected(false);
         value4.setSelected(false);
     }
-
+    private void setErrorLabel(Label errorMessage, String s) { errorMessage.setText(s); }
     private boolean checkAnswer1() {
         setErrorLabel(errorMessage, " ");
         return(value1.isSelected());
